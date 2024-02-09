@@ -1,0 +1,45 @@
+.card-hover {
+    img {
+        transform: scale(1);
+        transition: 0.3s all ease-in-out;
+    }
+
+    &:hover {
+        img {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.first-blog-img {
+    height: 329px;
+    border-radius: $radiusXL $radiusXL 0 0;
+
+    @include media-breakpoint-down(lg) {
+        height: 212px;
+    }
+}
+
+.single-blog {
+    .blog-img {
+        height: 262px;
+
+        @include media-breakpoint-down(lg) {
+            height: 250px;
+        }
+
+        .absolute-img {
+            height: 180px;
+            border-radius: $radiusXL $radiusXL 0 0;
+        }
+    }
+
+    label {
+        width: fit-content;
+
+        .rounded-icon {
+            width: 9px;
+            height: 9px;
+        }
+    }
+}

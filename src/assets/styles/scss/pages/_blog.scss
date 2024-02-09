@@ -1,0 +1,139 @@
+.first-blog-main {
+    .mainblog {
+        padding: 120px 35px 0 110px;
+
+        @include media-breakpoint-down(lg) {
+            padding: 85px 22px 0 22px;
+        }
+
+    }
+}
+
+.blog-label {
+    width: fit-content;
+
+    h6 {
+        margin-top: -2px;
+    }
+
+    .rounded-icon {
+        width: 9px;
+        height: 9px;
+    }
+}
+
+.blog-ul-point {
+    li {
+        .dots {
+            width: 8px;
+            height: 8px;
+        }
+    }
+}
+
+.blog-filter-cards {
+    border-radius: 0 0 $radiusL $radiusL !important;
+    margin-bottom: -20px !important;
+    padding-bottom: 140px !important;
+
+    @include media-breakpoint-down(md) {
+        padding-bottom: 76px !important;
+    }
+
+    .open-blog-images {
+        height: 420px;
+
+        @include media-breakpoint-down(md) {
+            height: 230px !important;
+        }
+    }
+
+}
+
+.blog-related {
+    border-radius: 0 0 $radiusL $radiusL !important;
+    margin-bottom: -20px !important;
+}
+
+.blog-open-data {
+    .blog-open-img {
+        height: 573px;
+
+        @include media-breakpoint-down(lg) {
+            height: 230px;
+        }
+    }
+}
+
+.share-button {
+    &:hover {
+        .main-share {
+            li {
+                @include media-breakpoint-up(lg) {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0) !important;
+                }
+            }
+        }
+    }
+
+    .main-share {
+        bottom: 120%;
+
+        ul {
+            position: initial;
+            top: 0;
+            left: 0;
+            display: flex;
+            opacity: 1 !important;
+            visibility: visible !important;
+
+            li {
+                list-style: none;
+                height: 30px;
+                width: 30px;
+                margin: 0 2px;
+                transition: all 0.3s ease-in-out;
+
+                @include media-breakpoint-up(lg) {
+                    opacity: 0;
+                    visibility: hidden;
+
+                    &:nth-child(1) {
+                        transform: translateY(10px);
+                    }
+
+                    &:nth-child(2) {
+                        transform: translateY(15px);
+                    }
+
+                    &:nth-child(3) {
+                        transform: translateY(20px);
+                    }
+
+                    &:nth-child(4) {
+                        transform: translateY(25px);
+                    }
+
+                    &:nth-child(5) {
+                        transform: translateY(30px);
+                    }
+                }
+
+                span {
+                    svg {
+                        padding: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+body {
+    ul.ass_floating.ass_flat {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

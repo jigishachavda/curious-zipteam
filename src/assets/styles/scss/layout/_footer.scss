@@ -1,0 +1,53 @@
+.footer-login {
+    input {
+        max-width: 534px;
+        padding: 19px 190px 19px 24px;
+        border-radius: 28px !important;
+        @include media-breakpoint-down(lg){
+            padding: 19px 65px 19px 24px;
+        }
+
+
+        &::placeholder {
+            color: $black;
+        }
+    }
+
+    .footer-icon {
+        padding-right: 2px !important;
+
+    }
+
+    .footer-btn {
+        width: 50px !important;
+        height: 50px !important;
+
+        @include media-breakpoint-down(lg) {
+            margin-right: 11.3% !important;
+        }
+
+        @include media-breakpoint-down(md) {
+            margin-right: 1.3% !important;
+        }
+    }
+}
+
+.footer-menus {
+    .footer-menus-link {
+        &:last-child {
+            margin-bottom: 0 !important;
+        }
+    }
+}
+
+.footer-bg-img {
+    @include media-breakpoint-up(lg) {
+        height: 100%;
+    }
+    @include media-breakpoint-down(lg) {
+        top: 488px !important;
+        left: auto !important;
+        height: 656px;
+        right: 24px;
+    }
+}

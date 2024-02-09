@@ -1,0 +1,24 @@
+.single-price {
+    box-shadow: 0px 0px 24px #00000005;
+    padding: 60px 35px 55px 39px;
+
+    h3,
+    h6,
+    p,
+    li {
+        color: $black !important;
+    }
+}
+
+.single-main-price {
+    box-shadow: 0px 0px 25px #426AF0;
+    padding: 60px 35px 55px 39px;
+    background-color: $primary;
+
+    h3,
+    h6,
+    p,
+    li {
+        color: $white !important;
+    }
+}

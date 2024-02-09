@@ -1,0 +1,31 @@
+@import "common/_variables";
+@import '~bootstrap/scss/bootstrap.scss';
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
+);
+// endbower
+@import "../scss/common/_fonts";
+@import "../scss/common/_global";
+@import "../scss/common/_theme";
+@import "../scss/common/_utilities";
+@import "../scss/components/_buttons";
+@import "../scss/components/_forms";
+@import "../scss/components/_cards";
+@import "../scss/components/_modals";
+@import "../scss/components/_slick";
+@import "../scss/layout/_header";
+@import "../scss/layout/_footer";
+@import "../scss/layout/_pages";
+
+// pages css
+@import '../scss/pages/_home';
+@import '../scss/pages/_blog';
+@import '../scss/pages/_pricing';
+@import '../scss/pages/_product';
+@import '../scss/pages/_solution';

@@ -1,0 +1,106 @@
+.home-hero {
+    height: 482px;
+
+    @include media-breakpoint-down(xl) {
+        height: auto !important;
+    }
+
+    .hero-bg-img {
+        height: 482px !important;
+
+        @include media-breakpoint-down(xl) {
+            margin-top: 100px !important;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 220px !important;
+            position: relative !important;
+        }
+
+        .gatsby-image-wrapper {
+            overflow: visible !important;
+
+            img {
+                transform: translate(0%, -50%) !important;
+                top: 50% !important;
+
+                @include media-breakpoint-down(md) {
+                    transform: translate(27%, -50%) !important;
+                    top: 40% !important;
+                }
+            }
+        }
+    }
+
+    .bg-pattern {
+        width: 520px !important;
+
+        @include media-breakpoint-down(lg) {
+            width: 301px !important;
+        }
+    }
+
+    .bg-image {
+        img {
+            height: 376px !important;
+            margin-left: -15% !important;
+
+            @include media-breakpoint-down(md) {
+                width: 319px !important;
+                height: 215px !important;
+                transform: translate(26%, -20%);
+            }
+        }
+    }
+}
+
+.disney-content {
+    height: 400px;
+
+    @include media-breakpoint-down(lg) {
+        height: auto !important;
+    }
+
+    .occasion {
+        width: 75px !important;
+        height: 75px !important;
+        min-width: 75px !important;
+    }
+
+    .disney-img {
+        width: 340px;
+    }
+}
+
+.how-work-section {
+    height: auto !important;
+
+    .nav-tabs {
+        --bs-nav-link-color: #fff !important;
+        --bs-nav-bg-color: #fff !important;
+        --bs-nav-tabs-link-active-color: #000 !important;
+        --bs-nav-link-hover-color: #fff !important;
+        border-bottom: transparent !important;
+        height: 39px !important;
+        background-color: rgba($color: #fff, $alpha: 0.06);
+
+        .nav-link {
+            border: transparent !important;
+            border-radius: $radiusX !important;
+            height: 29px !important;
+            margin-bottom: 0px !important;
+
+            &.active {
+                background-color: #F6F5F1 !important;
+            }
+        }
+    }
+}
+
+.team-card {
+    padding: 30px 33px 50px 33px !important;
+
+    @include media-breakpoint-down(md) {
+        padding: 27px 22px 28px 22px !important;
+    }
+}

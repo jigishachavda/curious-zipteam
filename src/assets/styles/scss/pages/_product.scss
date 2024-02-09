@@ -1,0 +1,87 @@
+.product-hero-section {
+    height: 777px;
+    overflow: hidden !important;
+    z-index: -1 !important;
+
+    @include media-breakpoint-down(md) {
+        height: 716px !important;
+    }
+
+    .pattern-1 {
+        width: 74%;
+        top: -100%;
+        right: -40%;
+
+        @include media-breakpoint-down(lg) {
+            width: 160%;
+            transform: rotate(45deg) !important;
+            right: -134%;
+            top: -40%;
+        }
+    }
+
+    .pattern-2 {
+        width: 60%;
+        left: -45%;
+        bottom: -66%;
+        transform: rotate(-72deg);
+
+        @include media-breakpoint-down(lg) {
+            width: 120%;
+            left: -13%;
+            bottom: -64%;
+            transform: rotate(201deg);
+        }
+    }
+}
+
+.background-height {
+    height: auto !important;
+    border-radius: $radiusSX $radiusSX 0 0 !important;
+    margin-top: -6% !important;
+    padding-top: 95px !important;
+}
+
+.skill-survey-section {
+    img {
+        height: 565px !important;
+
+        @include media-breakpoint-down(lg) {
+            height: 395px !important;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 294px !important;
+        }
+    }
+}
+
+.collection-section {
+    height: 504px !important;
+
+    @include media-breakpoint-down(lg) {
+        height: auto !important;
+    }
+
+    .collect-data {
+        padding: 0 94px 0 74px !important;
+
+        @include media-breakpoint-down(xl) {
+            padding: 0 50px 0 50px !important;
+        }
+
+        @include media-breakpoint-down(md) {
+            padding: 0 22px !important;
+        }
+
+        .collect-img {
+            height: 394px !important;
+            border-radius: $radiusXX $radiusXX 0 0 !important;
+
+
+            @include media-breakpoint-down(md) {
+                height: 236px !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,84 @@
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+    appearance: none !important;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+.button-filters {
+    button {
+        transition: all 400ms ease-in-out;
+
+        &.active {
+            background-color: $primary !important;
+            color: $white !important;
+        }
+    }
+}
+
+.btnA {
+    width: 190px;
+    height: 55px;
+    background-color: $primary;
+    color: #fff;
+    transition: all 400ms ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $primary;
+
+    &.btnS {
+        width: 158px !important;
+    }
+
+    &.btnM {
+        width: 168px !important;
+    }
+
+    &.btnX {
+        width: 180px !important;
+    }
+
+    &.res-btnXS {
+        @include media-breakpoint-down(lg) {
+            width: 170px !important;
+        }
+    }
+
+    svg {
+        fill: #fff;
+        transition: all 400ms ease-in-out;
+    }
+
+    &:hover {
+        background-color: #fff;
+        color: $secondary !important;
+        border: 1.5px solid $secondary;
+
+        svg {
+            fill: $secondary !important;
+        }
+    }
+
+    &.btn-border-white {
+        border: 1.5px solid #fff;
+        background-color: transparent !important;
+
+        &:hover {
+            background-color: #fff !important;
+            border: transparent !important;
+            color: $primary !important;
+
+            svg {
+                fill: $primary !important;
+            }
+        }
+
+    }
+}
+
+.demobook-btn {
+    margin-top: -2px;
+}
