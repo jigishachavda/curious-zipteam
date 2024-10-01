@@ -4,7 +4,7 @@ import { setInitialState } from '../utils/helpers';
 import Svg from '../components/ui/Svg';
 import Aos from 'aos';
 import { Link } from 'gatsby';
-import { Helmet } from 'gatsby-plugin-react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 import { HELPER } from '../services';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import BlogCards from '../components/templates/blog/BlogCards';

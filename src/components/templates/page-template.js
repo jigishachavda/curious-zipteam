@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from 'gatsby-plugin-react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 import { usePageBuilder } from "../../hooks/pages/usePageBuilder";
 
 const PageTemplate = ({ pageSlug }) => {
