@@ -8,7 +8,7 @@ export default function TextInput({ onChange, name, label, error, ...rest }) {
             <input
                 name={name}
                 onChange={onChange}
-                className='tk-degular fontM leadingM text-dark fw-normal bg-white rounded-pill dmb-15 w-100'
+                className='tk-degular fontM leadingM textdark fw-normal bg-white rounded-pill dmb-15 w-100'
                 {...rest}
             />
 

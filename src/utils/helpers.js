@@ -27,8 +27,6 @@ export const redirectToTop = () => {
   
 }
 
-
-
 export const copyElementWithEvents = (originalElementSelector) => {
   if (typeof window !== 'undefined') { 
       // Step 1: Get the reference to the element you want to copy

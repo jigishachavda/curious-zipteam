@@ -13,6 +13,7 @@ module.exports = {
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    contactFormName: "contact form"
   },
   plugins: [
     'gatsby-plugin-sass',
@@ -27,6 +28,10 @@ module.exports = {
         background_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/assets/images/gatsby-icon.png`,
+        defaults: {
+          quality: 90,
+          formats: [`auto`, `webp`, `avif`],
+        },
       },
     },
     `gatsby-plugin-image`,
@@ -51,11 +56,12 @@ module.exports = {
         alignment_mobile: "bottom",
       },
     },
+    `gatsby-plugin-react-helmet-async`,
     {
       resolve: "gatsby-source-wordpress",
       options: {
-        url: `http://tcw.karmadhi.com/graphql`,
-        baseUrl: "http://tcw.karmadhi.com/graphql",
+        url: `https://729ccff036.nxcli.net/graphql`,
+        baseUrl: "https://729ccff036.nxcli.net/graphql",
         concurrentRequests: 10,
         protocol: "https",
         hostingWPCOM: false,
@@ -64,13 +70,13 @@ module.exports = {
         perPage: 100,
         options: {
           schema: {
-            perPage: 10,
-            requestConcurrency: 5,
-            previewRequestConcurrency: 2,
+            perPage: 100,
+            requestConcurrency: 15,
+            previewRequestConcurrency: 5,
           }
         },
         searchAndReplaceContentUrls: {
-          sourceUrl: "http://tcw.karmadhi.com/graphql",
+          sourceUrl: "https://729ccff036.nxcli.net/graphql",
           replacementUrl: "",
         },
       },

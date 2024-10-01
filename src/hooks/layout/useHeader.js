@@ -10,13 +10,14 @@ export const useHeader = () => {
                             fieldGroupName
                             logo {
                                 localFile {
-                                            childImageSharp {
-                                                gatsbyImageData
-                                            }
-                                        }
+                                    childImageSharp {
+                                        gatsbyImageData
+                                    }
+                                }
                             }
                             menuLinks {
                                 link {
+                                    target
                                     title
                                     url
                                 }
@@ -38,6 +39,8 @@ export const useHeader = () => {
                                     heading
                                     description
                                     link {
+                                        target
+                                        title
                                         url
                                     }
                                 }

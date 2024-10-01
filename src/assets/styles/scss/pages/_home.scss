@@ -17,6 +17,11 @@
             position: relative !important;
         }
 
+        .p-initial{
+            @include media-breakpoint-down(xl){
+                position: initial !important;
+            }
+        }
         .gatsby-image-wrapper {
             overflow: visible !important;
 

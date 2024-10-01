@@ -1,26 +1,20 @@
 @import '../common/variables';
 
 // ============ FONT COLOR
-.text-blue {
+.textblue {
     color: $primary;
 }
 
-.text-dark {
-    color: $secondary !important;
+.textdark {
+    color: $secondary;
 }
 
-.text-lightgray {
+.textlightgray {
     color: $lightgray;
 }
 
-.text-gray {
-    color: $gray !important;
-}
-
-.res-text-white {
-    @include media-breakpoint-down(lg) {
-        color: $white !important;
-    }
+.textgray {
+    color: $gray;
 }
 
 // ============ FONT SIZE
@@ -104,93 +98,6 @@
     font-size: $fontLL;
 }
 
-// ============ RES FONT SIZE
-@include media-breakpoint-down(lg) {
-    .res-fontX {
-        font-size: $fontX;
-    }
-
-    .res-fontS {
-        font-size: $fontS;
-    }
-
-    .res-fontM {
-        font-size: $fontM;
-    }
-
-    .res-fontL {
-        font-size: $fontL;
-    }
-
-    .res-fontXX {
-        font-size: $fontXX;
-    }
-
-    .res-fontXS {
-        font-size: $fontXS;
-    }
-
-    .res-fontXM {
-        font-size: $fontXM;
-    }
-
-    .res-fontXL {
-        font-size: $fontXL;
-    }
-
-    .res-fontSX {
-        font-size: $fontSX;
-    }
-
-    .res-fontSS {
-        font-size: $fontSS;
-    }
-
-    .res-fontSM {
-        font-size: $fontSM;
-    }
-
-    .res-fontSL {
-        font-size: $fontSL;
-    }
-
-    .res-fontMX {
-        font-size: $fontMX;
-    }
-
-    .res-fontMS {
-        font-size: $fontMS;
-    }
-
-    .res-fontLM {
-        font-size: $fontLM;
-    }
-
-    .res-fontMM {
-        font-size: $fontMM;
-    }
-
-    .res-fontML {
-        font-size: $fontML;
-    }
-
-    .res-fontLX {
-        font-size: $fontLX;
-    }
-
-    .res-fontLS {
-        font-size: $fontLS;
-    }
-
-    .res-fontLL {
-        font-size: $fontLL;
-    }
-
-    .res-fw-medium {
-        font-weight: 500 !important;
-    }
-}
-
 // ============ LEADING
 .leadingX {
     line-height: $leadingX;
@@ -268,8 +175,166 @@
     line-height: $leadingLS;
 }
 
-// ============ RES LEADING
+.leadingLL {
+    line-height: $leadingLL;
+}
+
+// ============ BORDER RADIUS
+.radiusX {
+    border-radius: $radiusX;
+}
+
+.radiusS {
+    border-radius: $radiusS;
+}
+
+.radiusM {
+    border-radius: $radiusM;
+}
+
+.radiusL {
+    border-radius: $radiusL;
+}
+
+.radiusXX {
+    border-radius: $radiusXX;
+}
+
+.radiusXS {
+    border-radius: $radiusXS;
+}
+
+.radiusXM {
+    border-radius: $radiusXM;
+
+}
+
+.radiusXL {
+    border-radius: $radiusXL;
+}
+
+.radiusSX {
+    border-radius: $radiusSX;
+}
+
+.border-grayOne {
+    border: 1px solid $grayOne;
+}
+
+// ============ BACKGROUND COLOR
+.bgprimary {
+    background-color: $primary !important;
+}
+
+.bg-shareGray {
+    background-color: $shareGray !important;
+}
+
+.bg-gray {
+    background-color: $gray !important;
+}
+
+.bg-grayTwo {
+    background-color: $grayTwo;
+}
+
+.bg-purple {
+    background-color: $purple !important;
+}
+
+.bg-lightgray {
+    background-color: $lightgray !important;
+}
+
+.bg-grayThree {
+    background-color: $grayThree !important;
+}
+
+
 @include media-breakpoint-down(lg) {
+
+    // ============ RES FONT SIZE
+    .res-fontX {
+        font-size: $fontX !important;
+    }
+
+    .res-fontS {
+        font-size: $fontS !important;
+    }
+
+    .res-fontM {
+        font-size: $fontM !important;
+    }
+
+    .res-fontL {
+        font-size: $fontL !important;
+    }
+
+    .res-fontXX {
+        font-size: $fontXX !important;
+    }
+
+    .res-fontXS {
+        font-size: $fontXS !important;
+    }
+
+    .res-fontXM {
+        font-size: $fontXM !important;
+    }
+
+    .res-fontXL {
+        font-size: $fontXL !important;
+    }
+
+    .res-fontSX {
+        font-size: $fontSX !important;
+    }
+
+    .res-fontSS {
+        font-size: $fontSS !important;
+    }
+
+    .res-fontSM {
+        font-size: $fontSM !important;
+    }
+
+    .res-fontSL {
+        font-size: $fontSL !important;
+    }
+
+    .res-fontMX {
+        font-size: $fontMX !important;
+    }
+
+    .res-fontMS {
+        font-size: $fontMS !important;
+    }
+
+    .res-fontLM {
+        font-size: $fontLM !important;
+    }
+
+    .res-fontMM {
+        font-size: $fontMM !important;
+    }
+
+    .res-fontML {
+        font-size: $fontML !important;
+    }
+
+    .res-fontLX {
+        font-size: $fontLX !important;
+    }
+
+    .res-fontLS {
+        font-size: $fontLS !important;
+    }
+
+    .res-fontLL {
+        font-size: $fontLL !important;
+    }
+
+    // ============ RES LEADING
     .res-leadingX {
         line-height: $leadingX;
     }
@@ -337,92 +402,27 @@
     .res-leadingLX {
         line-height: $leadingLX;
     }
-}
 
-// ============ BORDER RADIUS
-.radiusX {
-    border-radius: $radiusX;
-}
-
-.radiusS {
-    border-radius: $radiusS;
-}
-
-.radiusM {
-    border-radius: $radiusM;
-}
-
-.radiusL {
-    border-radius: $radiusL;
-}
-
-.radiusXX {
-    border-radius: $radiusXX;
-}
-
-.radiusXS {
-    border-radius: $radiusXS;
-}
-
-.radiusXM {
-    border-radius: $radiusXM;
-
-}
-
-.radiusXL {
-    border-radius: $radiusXL;
-}
-
-.radiusSX {
-    border-radius: $radiusSX;
-}
-
-.border-grayOne {
-    border: 1px solid $grayOne;
-}
-
-.no-radius {
-    @include media-breakpoint-down(lg) {
-        border-radius: 0 !important;
-    }
-}
-
-// ============ BACKGROUND COLOR
-.bg-primary {
-    background-color: $primary !important;
-}
-
-.bg-shareGray {
-    background-color: $shareGray !important;
-}
-
-.bg-gray {
-    background-color: $gray !important;
-}
-
-.bg-grayTwo {
-    background-color: $grayTwo;
-}
-
-.bg-purple {
-    background-color: $purple !important;
-}
-
-.bg-lightgray {
-    background-color: $lightgray !important;
-}
-
-.bg-grayThree {
-    background-color: $grayThree !important;
-}
-
-// ============ RES FONT WEIGHT
-@include media-breakpoint-down(lg) {
+    // ============ RES FONT WEIGHT
     .res-fw-semibold {
         font-weight: 600 !important;
     }
 
     .res-fw-regular {
         font-weight: 400 !important;
+    }
+
+    .res-fw-medium {
+        font-weight: 500 !important;
+    }
+
+    // ============ RES FONT color
+    .res-text-white {
+        color: $white !important;
+    }
+
+    // ============ RES radius
+    .no-radius {
+        border-radius: 0 !important;
     }
 }

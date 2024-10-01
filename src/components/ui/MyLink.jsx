@@ -14,11 +14,11 @@ const MyLink = ({ to, state, children }) => {
                 keyCode = null;
             };
         }
-    }, [])
+    }, [isBrowser])
     const redirectToLink = (e) => {
         if (isBrowser) {
             window.localStorage.setItem('my_state', JSON.stringify(state))
-            if (keyCode == 17) {
+            if (keyCode === 17) {
                 window.open(`${window.location.origin}${to}`);
             } else {
                 navigate(to)

@@ -1,0 +1,28 @@
+.disney-content {
+  .swiper {
+    .swiper-wrapper {
+      .swiper-slide {
+        opacity: 0 !important;
+        &.swiper-slide-active {
+          opacity: 1 !important;
+        }
+      }
+    }
+    .swiper-pagination {
+      text-align: -webkit-auto !important;
+      bottom: 0px !important;
+
+      @include media-breakpoint-down(lg){
+        text-align: center !important;
+      }
+
+      .swiper-pagination-bullet {
+        background-color: $gray;
+
+        &.swiper-pagination-bullet-active{
+          background-color: $primary;
+        }
+      }
+    }
+  }
+}

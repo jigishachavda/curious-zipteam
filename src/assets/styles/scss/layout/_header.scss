@@ -1,204 +1,493 @@
 body {
-    &::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.16);
-        z-index: 100;
-        opacity: 0;
-        visibility: hidden;
-    }
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.16);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+  }
 
-    &.show-background-layer {
-        &::before {
-            opacity: 1;
-            visibility: visible;
-        }
+  &.show-background-layer {
+    &::before {
+      opacity: 1;
+      visibility: visible;
     }
+  }
 }
 
 header {
-    z-index: 999;
-    transition: all 0.4s ease-in-out;
+  z-index: 999;
+  transition: all 0.4s ease-in-out;
+
+  @include media-breakpoint-down(lg) {
+    background-color: $white !important;
+
+    .logo {
+      svg {
+        g {
+          g {
+            &:first-child {
+              path {
+                fill: $black !important;
+              }
+            }
+            path {
+              fill: $primary !important;
+            }
+          }
+        }
+      }
+    }
+
+    &.header-black.header-res,
+    &.header-white.header-res,
+    &.header-white.header-clicked.header-res {
+      height: 100vh;
+      overflow-y: auto;
+      .logo {
+        svg {
+          g {
+            g {
+              &:first-child {
+                path {
+                  fill: $white !important;
+                }
+              }
+              path {
+                fill: $white !important;
+              }
+            }
+          }
+        }
+      }
+      .main-menu {
+        .main-menu-li {
+          .main-link {
+            .dropdown-icon {
+              svg {
+                path {
+                  fill: $white !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.header-fixed-os {
+    transform: translateY(0) !important;
+  }
+
+  &.hidden {
+    transform: translateY(-150%);
+  }
+
+  &.header-fixed {
+    background-color: $white !important;
+    box-shadow: 0px 0px 20px #00000029;
+    transition: all 0.3s ease-in-out;
+
+    &.header-white.header-res,
+    &.header-black.header-res {
+      @include media-breakpoint-down(lg) {
+        background-color: $primary !important;
+        .logo {
+          svg {
+            g {
+              g {
+                &:first-child {
+                  path {
+                    fill: $white !important;
+                  }
+                }
+                path {
+                  fill: $white !important;
+                }
+              }
+            }
+          }
+        }
+        .main-menu {
+          .main-menu-li {
+            .main-link {
+              .dropdown-icon {
+                svg {
+                  path {
+                    fill: $white !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.header-black,
+  &.header-fixed,
+  &.header-white.header-fixed,
+  &.header-white.header-clicked {
+    .main-menu {
+      .main-menu-li {
+        .main-link {
+          color: $black !important;
+
+          .dropdown-icon {
+            svg {
+              path {
+                fill: $black !important;
+              }
+            }
+          }
+        }
+      }
+    }
+    .login {
+      color: $black !important;
+    }
+    .logo {
+      svg {
+        g {
+          g {
+            &:first-child {
+              path {
+                fill: $black !important;
+              }
+            }
+            path {
+              fill: $primary !important;
+            }
+          }
+        }
+      }
+    }
+    .btnA {
+      border: 1px solid $primary !important;
+      background-color: $primary !important;
+
+      &:hover {
+        background-color: transparent !important;
+        border-color: $secondary !important;
+        color: $secondary !important;
+
+        svg {
+          fill: $secondary !important;
+        }
+      }
+    }
+  }
+
+  &.header-white,
+  &.header-white.header-res,
+  &.header-black.header-res {
+    .main-menu {
+      .main-menu-li {
+        .main-link {
+          color: $white !important;
+        }
+      }
+    }
+    .login {
+      color: $white !important;
+    }
+
+    .btnA {
+      border: 1.5px solid #fff !important;
+      background-color: transparent !important;
+
+      &:hover {
+        background-color: #fff !important;
+        border: transparent;
+        color: $primary !important;
+
+        svg {
+          fill: $primary !important;
+        }
+      }
+    }
+  }
+
+  .dropdown-icon {
+    padding-top: 4px;
+
+    svg {
+      transform: rotate(0deg);
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  .mega-menu-container {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 510px;
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
 
     @include media-breakpoint-down(lg) {
-        background-color: #fff !important;
-        overflow-y: auto;
-
-        .logo {
-            svg {
-                g {
-                    g {
-                        &:last-child {
-                            path {
-                                fill: $primary !important;
-                            }
-                        }
-
-                        &:first-child {
-                            path {
-                                fill: #000 !important;
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
-
-        &.res-menu {
-            .logo {
-                svg {
-                    g {
-                        g {
-                            path {
-                                fill: #fff !important;
-                            }
-
-                        }
-
-                    }
-                }
-            }
-        }
+      position: initial !important;
+      height: 0px;
+      box-shadow: none !important;
     }
 
-    .main-menu {
-        li {
-            a {
-                @include media-breakpoint-down(lg) {
-                    color: #fff !important;
-                }
-            }
-        }
-    }
+    a {
+      color: $black !important;
 
-    .dropdown-icon {
-        .rotate-180 {
+      @include media-breakpoint-down(lg) {
+        color: $white !important;
+      }
+    }
+  }
+  .main-menu-li {
+    &.megamenu-open {
+      .mega-menu-container {
+        height: fit-content;
+        opacity: 1;
+        visibility: visible;
+        overflow: visible;
+        display: block !important;
+      }
+      .header-bg {
+        height: 195px !important;
+      }
+      .submenu-img {
+        width: 240px !important;
+        height: 158px !important;
+        border-radius: $radiusXL $radiusXL 0 0;
+      }
+      .main-link {
+        .dropdown-icon {
+          svg {
             transform: rotate(180deg);
+          }
         }
-
-        @include media-breakpoint-down(lg) {
-            svg {
-                path {
-                    fill: #fff !important;
-                }
-            }
-        }
+      }
     }
-
-    .main-menu-li {
-        &.megamenu-open {
-            .mega-menu-container {
-                opacity: 1;
-                visibility: visible;
-                height: fit-content;
-
-                @include media-breakpoint-down(lg) {
-                    padding-bottom: 30px !important;
-                }
-
-            }
-
-            .main-link {
-                .dropdown-icon {
-                    svg {
-                        transform: rotate(180deg);
-                    }
-                }
-            }
-        }
-
-        .main-link {
-            .dropdown-icon {
-                padding-top: 5px;
-
-                svg {
-                    transition: all 0.4s ease-in-out;
-                    transform: rotate(0deg);
-                }
-            }
-        }
-    }
-
-    .mega-menu-container {
-        opacity: 0;
-        visibility: hidden;
-        overflow: hidden;
-        height: 510px;
-        transition: all 0.4s ease-in-out;
-        z-index: -1;
-
-        @include media-breakpoint-down(lg) {
-            height: 0px;
-        }
-
-        .header-bg {
-            height: 195px !important;
-        }
-
-        .submenu-img {
-            width: 240px !important;
-            height: 158px !important;
-            border-radius: $radiusXL $radiusXL 0 0;
-        }
-    }
-
-    &.header-fixed-os {
-        transform: translateY(0) !important;
-    }
-
-    &.header-fixed {
-        background-color: #fff;
-        box-shadow: 0px 0px 20px #00000029;
-        transition: all 0.3s ease-in-out;
-
-        @include media-breakpoint-up(lg) {
-            li {
-                a {
-                    color: #000 !important;
-                }
-            }
-
-            .logo {
-                svg {
-                    g {
-                        g {
-                            &:last-child {
-                                path {
-                                    fill: $primary !important;
-                                }
-                            }
-
-                            &:first-child {
-                                path {
-                                    fill: #000 !important;
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-
-            .login {
-                color: #000 !important;
-            }
-
-            .dropdown-icon {
-                svg {
-                    path {
-                        fill: #000 !important;
-                    }
-                }
-            }
-        }
-    }
-
-    &.hidden {
-        transform: translateY(-150%);
-    }
+  }
 }
+
+// header {
+//   z-index: 999;
+//   transition: all 0.4s ease-in-out;
+
+//   @include media-breakpoint-down(lg) {
+//     background-color: #fff !important;
+//     overflow-y: auto;
+
+//     .logo {
+//       svg {
+//         g {
+//           g {
+//             &:last-child {
+//               path {
+//                 fill: $primary !important;
+//               }
+//             }
+
+//             &:first-child {
+//               path {
+//                 fill: #000 !important;
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+
+//     &.res-menu {
+//       .logo {
+//         svg {
+//           g {
+//             g {
+//               path {
+//                 fill: #fff !important;
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   .main-menu {
+//     li {
+//       a {
+//         @include media-breakpoint-down(lg) {
+//           color: #fff !important;
+//         }
+//       }
+//     }
+//   }
+
+//   .dropdown-icon {
+//     .rotate-180 {
+//       transform: rotate(180deg);
+//     }
+
+//     @include media-breakpoint-down(lg) {
+//       svg {
+//         path {
+//           fill: #fff !important;
+//         }
+//       }
+//     }
+//   }
+
+//   .main-menu-li {
+//     &.megamenu-open {
+//       .mega-menu-container {
+//         opacity: 1;
+//         visibility: visible;
+//         height: fit-content;
+
+//         @include media-breakpoint-down(lg) {
+//           padding-bottom: 30px !important;
+//         }
+//       }
+
+//       .main-link {
+//         .dropdown-icon {
+//           svg {
+//             transform: rotate(180deg);
+//           }
+//         }
+//       }
+//     }
+
+//     .main-link {
+//       .dropdown-icon {
+//         padding-top: 5px;
+
+//         svg {
+//           transition: all 0.4s ease-in-out;
+//           transform: rotate(0deg);
+//         }
+//       }
+//     }
+//   }
+
+//   .mega-menu-container {
+//     opacity: 0;
+//     visibility: hidden;
+//     overflow: hidden;
+//     height: 510px;
+//     transition: all 0.4s ease-in-out;
+//     z-index: -1;
+//     position: absolute;
+
+//     @include media-breakpoint-down(lg) {
+//       position: initial !important;
+//       height: 0px;
+//     }
+
+//     .header-bg {
+//       height: 195px !important;
+//     }
+
+//     .submenu-img {
+//       width: 240px !important;
+//       height: 158px !important;
+//       border-radius: $radiusXL $radiusXL 0 0;
+//     }
+//   }
+
+//   &.header-fixed-os {
+//     transform: translateY(0) !important;
+//   }
+
+//   &.header-fixed {
+//     background-color: #fff;
+//     box-shadow: 0px 0px 20px #00000029;
+//     transition: all 0.3s ease-in-out;
+
+//     @include media-breakpoint-up(lg) {
+//       li {
+//         a {
+//           color: $black !important;
+//         }
+//       }
+//       .logo {
+//         svg {
+//           g {
+//             g {
+//               &:last-child {
+//                 path {
+//                   fill: $primary !important;
+//                 }
+//               }
+
+//               &:first-child {
+//                 path {
+//                   fill: #000 !important;
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+
+//       .login {
+//         color: #000 !important;
+//       }
+
+//       .dropdown-icon {
+//         svg {
+//           path {
+//             fill: #000 !important;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   &.hidden {
+//     transform: translateY(-150%);
+//   }
+
+//   &.header-white {
+//     ul {
+//       li {
+//         a {
+//           color: $white !important;
+//         }
+//       }
+//     }
+//     .login {
+//       color: $white !important;
+//     }
+
+//     &.header-fixed {
+//       li {
+//         a {
+//           color: $black !important;
+//         }
+//       }
+//       .login {
+//         color: $black !important;
+//       }
+//     }
+//   }
+//   &.header-black {
+//     ul {
+//       li {
+//         a {
+//           color: $black !important;
+//         }
+//       }
+//     }
+//     .login {
+//       color: $black !important;
+//     }
+//   }
+// }

@@ -11,7 +11,7 @@ export const isEmpty = (value) => {
     (isArray(value) && value.length === 0) ||
     value === undefined ||
     value === "undefined" ||
-    value == null ||
+    value === null ||
     value === ""
   );
 };

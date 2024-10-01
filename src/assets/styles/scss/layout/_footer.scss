@@ -3,7 +3,8 @@
         max-width: 534px;
         padding: 19px 190px 19px 24px;
         border-radius: 28px !important;
-        @include media-breakpoint-down(lg){
+
+        @include media-breakpoint-down(lg) {
             padding: 19px 65px 19px 24px;
         }
 
@@ -44,10 +45,25 @@
     @include media-breakpoint-up(lg) {
         height: 100%;
     }
+
     @include media-breakpoint-down(lg) {
         top: 488px !important;
         left: auto !important;
         height: 656px;
         right: 24px;
+    }
+}
+
+.social-icons {
+    li {
+        a {
+            height: fit-content;
+        }
+    }
+}
+
+.footer-logo2{
+    .gatsby-image-wrapper{
+        width: 100px;
     }
 }

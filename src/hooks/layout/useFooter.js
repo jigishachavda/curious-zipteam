@@ -8,6 +8,13 @@ export const useFooter = () => {
                     footer {
                         ACF_footer {
                             formHeading
+                            logo2 {
+                                localFile {
+                                    childImageSharp {
+                                        gatsbyImageData
+                                    }
+                                }
+                            }
                             column1 {
                                 heading
                                 links {

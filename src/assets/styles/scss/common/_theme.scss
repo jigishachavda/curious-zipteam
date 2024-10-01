@@ -11,12 +11,12 @@
 
 // TEXT OVERFLOW CSS
 .text-truncate {
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: vertical !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
 }
 
 .text-truncate2 {
@@ -70,52 +70,52 @@
 }
 
 .row {
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: 0 !important; 
+    margin-right: 0 !important;
 
     &>* {
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 }
 
 .rowA {
-    margin-left: -15px;
-    margin-right: -15px;
+    margin-left: -15px !important;
+    margin-right: -15px !important;
 
     &>* {
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
     }
 }
 
 .rowB {
-    margin-left: -11px;
-    margin-right: -11px;
+    margin-left: -11px !important;
+    margin-right: -11px !important;
 
     &>* {
-        padding-left: 11px;
-        padding-right: 11px;
+        padding-left: 11px !important;
+        padding-right: 11px !important;
     }
 }
 
 .rowX {
-    margin-left: -20px;
-    margin-right: -20px;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
 
     &>* {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 20px !important; 
+        padding-right: 20px !important;
     }
 }
 
 .rowS {
-    margin-left: -18px;
-    margin-right: -18px;
+    margin-left: -18px !important;
+    margin-right: -18px !important;
 
     &>* {
-        padding-left: 18px;
-        padding-right: 18px;
+        padding-left: 18px !important;
+        padding-right: 18px !important;
     }
 }
 
@@ -130,6 +130,12 @@
     @include media-breakpoint-down(lg) {
         padding-left: 0 !important;
         padding-right: 0 !important;
+    }
+}
+.mx-m-0 {
+    @include media-breakpoint-down(lg) {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 }
 

@@ -10,9 +10,13 @@ export default function BookDemoBtn(props) {
   } = props
 
   return (
-    <a href={url} {...rest} className={`text-decoration-none d-flex align-items-center justify-content-center text-white btnA btnX rounded-5 ${extraClass}`}>
-      <span className='tk-degular fontXX leadingX demobook-btn'>{title}</span>
-      <Svg ButtonArrow />
-    </a>
+    <>
+      {title &&
+        <a href={url} {...rest} className={`text-decoration-none d-flex align-items-center justify-content-center text-white btnA btnX rounded-5 ${extraClass}`}>
+          <span className='tk-degular fontXX leadingX demobook-btn'>{title}</span>
+          <Svg ButtonArrow />
+        </a>
+      }
+    </>
   )
 }

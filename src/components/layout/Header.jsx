@@ -1,176 +1,128 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHeader } from '../../hooks/layout/useHeader';
-import Svg from '../ui/Svg';
 import { usePageBuilder } from '../../hooks/pages/usePageBuilder';
-import BookDemoBtn from '../common/BookDemoBtn';
 import useHeaderMenu from '../../hooks/custom/useHeaderMenu';
+import Svg from '../ui/Svg';
 import { Link } from 'gatsby';
-import { HELPER } from '../../services';
+import BookDemoBtn from '../common/BookDemoBtn';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const Header = ({ pageSlug }) => {
     const data = useHeader();
-    const nodes = data.allWp.nodes
-    const headerData = nodes[0]?.header.ACF_header
+    const nodes = data?.allWp?.nodes
+    const headerData = nodes[0]?.header?.ACF_header
     const data2 = usePageBuilder();
-    const headerBg = data2.allWpPage.nodes
-    const pageDetails = headerBg.find(node => node.title.toLowerCase().includes(pageSlug))
-
-    const {
-        activeMenuIndex,
-        isMenuOpen,
-        isHeaderFixed,
-        isHidden,
-        isMenuIconClicked,
-        headerRef, handleMenuClick,
-        handleMenuIconClick
-    } = useHeaderMenu()
+    const headerBg = data2?.allWpPage?.nodes
+    const [headerColor, setHeaderColor] = useState('');
 
     useEffect(() => {
-        HELPER.addSlugToBody(pageSlug);
-    }, [])
+        const slug = window.location.pathname.split('/').filter(Boolean).pop();
 
-    const LogoSvg = () => {
-        let logoType = 'blackLogo';
-        if (pageDetails?.ACF_headerColor?.headerColor === 'black') {
-            if (isMenuIconClicked || !isMenuOpen) {
-                logoType = 'whiteLogo';
-            }
+        const matchedItem = headerBg.find(item => item?.slug === slug);
+
+        if (matchedItem) {
+            setHeaderColor(matchedItem.ACF_headerColor?.headerColor);
+        } else {
+            setHeaderColor('black');
         }
-        const BlackLogo = () => <Svg blackLogo />;
-        const WhiteLogo = () => <Svg whiteLogo />;
+    }, [headerBg, pageSlug]);
 
-        return (
-            <>
-                {logoType === 'blackLogo' && <BlackLogo />}
-                {logoType === 'whiteLogo' && <WhiteLogo />}
-            </>
-        );
-    };
-
-    const ArrowSvg = ({ rotate }) => {
-        let arrowType = 'angleDonwBlack'
-        if (pageDetails?.ACF_headerColor?.headerColor === 'black') {
-            if (!isMenuOpen) {
-                arrowType = 'angleDonwWhite'
-            }
-        }
-        const prop = { [arrowType]: arrowType };
-        if (rotate) {
-            prop['rotated'] = true;
-        }
-        const BlackArrow = () => <Svg angleDonwBlack />;
-        const WhiteArrow = () => <Svg angleDonwWhite />;
-
-        return (
-            <>
-                {arrowType === 'angleDonwBlack' && <BlackArrow />}
-                {arrowType === 'angleDonwWhite' && <WhiteArrow />}
-            </>
-        );
-    };
-
-    const headerColor = useMemo(() => {
-        let color = 'text-black';
-        if (pageDetails?.ACF_headerColor?.headerColor == 'black' && (isMenuIconClicked || !isMenuOpen)) {
-            color = 'text-white';
-        }
-        return color;
-    }, [pageDetails, isMenuOpen])
-
-    const borderBtnClass = useMemo(() => {
-        let extraClass = '';
-        if (pageDetails?.ACF_headerColor?.headerColor == 'black' && false == isMenuOpen) {
-            extraClass = 'btn-border-white';
-        }
-        return extraClass;
-    }, [pageDetails, isMenuOpen])
+    const {
+        isHeaderFixed, isHidden, activeMenuIndex, handleMenuClick, handleMenuIconClick, isMenuOpen, isClicked, headerRef, isMenuIconClicked, handleMegaMenuIconClick
+    } = useHeaderMenu()
 
     return (
-        <header ref={headerRef} className={`position-fixed top-0 w-100 ${isHeaderFixed ? 'header-fixed' : 'header-fixed-os'} ${isHidden ? 'hidden' : ''} ${isMenuIconClicked ? 'bg-primary h-100 res-menu' : ''}`}>
-            <div className='position-relative tpt-75 dpt-30 dpb-30'>
-                <div className='container containerS h-100'>
-                    <div className='row h-100 w-100 d-lg-flex justify-content-between align-items-center'>
-                        <a href='/' className='col-6 col-lg-3 col-xl-4 logo'>
-                            <LogoSvg />
-                        </a>
-                        <div className='col-1 menu-icon d-lg-none d-flex justify-content-end' onClick={handleMenuIconClick}>
-                            {isMenuIconClicked ? <Svg resMenuClose /> : <Svg menuIcon />}
-                        </div>
-                        <div className={`col-12 col-lg-6 col-xl-4 ${isMenuIconClicked ? 'd-lg-none d-block' : 'd-lg-block d-none'}`}>
-                            <ul className='main-menu d-lg-flex list-none ps-0 mb-0 tpt-60'>
-                                {headerData?.menuLinks?.map((item, i) => (
-                                    <li key={i} className={`main-menu-li d-lg-flex align-items-center w-100 px-lg-3 ${(activeMenuIndex === i && item.megaMenu && isMenuOpen) ? 'megamenu-open' : ''}  ${isMenuIconClicked ? ' position-relative w-100' : ''}`} onClick={(event) => {
-                                        handleMenuClick(i, event)
-                                    }}>
-                                        <Link to={item.link.url} className={`main-link text-decoration-none d-flex align-items-center ${headerColor} ${isMenuIconClicked ? 'tmb-40' : ''}`}
-                                        >
+        <header ref={headerRef} className={`header-${headerColor} position-fixed top-0 w-100 tpt-75 dpt-30 dpb-30 ${isHeaderFixed ? 'header-fixed' : 'header-fixed-os'} ${isHidden ? 'hidden' : ''} ${isClicked ? 'header-clicked' : ''} ${isMenuIconClicked ? 'header-res bgprimary' : ''}`}>
+            <div className='container containerS'>
+                <div className='row align-items-center'>
+                    <a href='/' className='col-6 col-lg-3 logo'>
+                        {headerColor === 'black' ? <Svg blackLogo /> : <Svg whiteLogo />}
+                    </a>
+                    <div className='col-6 menu-icon d-lg-none d-inline-flex justify-content-end' onClick={handleMenuIconClick}>
+                        {isMenuIconClicked ? <Svg resMenuClose /> : <Svg menuIcon />}
+                    </div>
+                    <div className={`col-12 col-lg-6 ${isMenuIconClicked ? 'd-lg-none' : 'd-none d-lg-block'}`}>
+                        <ul className='main-menu d-flex flex-wrap flex-lg-row flex-column justify-content-lg-center list-none ps-0 mb-0 tpt-60'>
+                            {headerData?.menuLinks?.map((item, i) => (
+                                <li key={i} className={`main-menu-li px-lg-3 ${(activeMenuIndex === i && item.megaMenu && isMenuOpen) ? 'megamenu-open' : ''} ${isMenuIconClicked ? 'position-relative w-100' : ''}`} onClick={(event) => {
+                                    handleMenuClick(i, event, item.megaMenu ? true : false)
+                                }}>
+                                    {item?.megaMenu ? (
+                                        <Link to='#' className={`main-link text-decoration-none d-flex align-items-center ${isMenuIconClicked ? 'tmb-10' : ''}`}>
                                             <span className='fontXX leadingL res-fontLM res-leadingXX tk-degular fw-medium fw-lg-semibold me-1 cursor-pointer'>
-                                                {item.link.title}
+                                                {item?.link?.title}
                                             </span>
                                             <div className='dropdown-icon d-flex align-items-center justify-content-center'>
-                                                {item.megaMenu && (
-                                                    <ArrowSvg />
+                                                {item?.megaMenu && (
+                                                    <>
+                                                        {headerColor === 'black' ? <Svg angleDonwBlack /> : <Svg angleDonwWhite />}
+                                                    </>
                                                 )}
                                             </div>
                                         </Link>
-                                        <div className={`mega-menu-container position-absolute p-initial top-0 start-0 w-100 bg-white box-shadow no-box-shadow tpb-0 tpt-0 dpb-120 dpt-115 ${isMenuIconClicked ? 'bg-primary text-white' : ''}`}>
-                                            <div className='container containerS'>
-                                                <div className='row rowX'>
-                                                    {item?.megaMenu?.map((menuItem, index) => (
-                                                        <div key={index} className='col-lg-4 col-xl-3'>
-                                                            <Link to={menuItem.link.url} className='text-decoration-none text-black' onClick={() => {
-                                                                handleMenuIconClick()
-                                                            }}>
-                                                                <div className='header-bg position-relative dmb-30 d-none d-lg-block'>
-                                                                    <GatsbyImage image={getImage(menuItem?.background?.localFile)} className='w-100 h-100 object-cover radiusXM' alt="-" />
-                                                                    {item.link.title.toLowerCase().includes('resources') ?
-                                                                        (<div className='submenu-res-img position-absolute w-100 h-100 top-0 d-flex justify-content-center align-items-center'>
-                                                                            <GatsbyImage image={getImage(menuItem?.image?.localFile)} className='' alt="-" />
-                                                                        </div>) :
-                                                                        (<div className='submenu-img position-absolute bottom-0 w-100 h-100 left-center'>
-                                                                            <GatsbyImage image={getImage(menuItem?.image?.localFile)} className='w-100 h-100 object-cover' alt="-" />
-                                                                        </div>)
-                                                                    }
-                                                                </div>
-                                                                <h1 className='fontXX leadingL res-fontLM tk-degular fw-medium fw-lg-normal tmb-30 dmb-10'>{menuItem?.heading}</h1>
-                                                                <span className='fontS leadingS tk-degular fw-normal opacity-50 d-none d-lg-block'>{menuItem?.description}</span>
-                                                            </Link>
-                                                        </div>
-                                                    ))}
-                                                </div>
+                                    ) : (
+                                        <Link to={item?.link?.url} className='main-link text-decoration-none' onClick={() => {
+                                            handleMegaMenuIconClick()
+                                        }}>
+                                            <span className='fontXX leadingL res-fontLM res-leadingXX tk-degular fw-medium fw-lg-semibold me-1 cursor-pointer'>
+                                                {item?.link?.title}
+                                            </span>
+                                        </Link>
+                                    )}
+                                    <div className={`mega-menu-container box-shadow bg-white ${isMenuIconClicked ? 'bg-transparent tpt-20 tpb-20' : 'dpt-120 dpb-120'}`}>
+                                        <div className='container containerS'>
+                                            <div className='row rowB'>
+                                                {item?.megaMenu?.map((menuItem, index) => (
+                                                    <div key={index} className='col-lg-4 col-xl-3'>
+                                                        <Link to={menuItem?.link?.url} className='text-decoration-none' onClick={() => {
+                                                            handleMegaMenuIconClick()
+                                                        }}>
+                                                            <div className='header-bg position-relative dmb-30 d-none d-lg-block'>
+                                                                <GatsbyImage image={getImage(menuItem?.background?.localFile)} className='w-100 h-100 object-cover radiusXM' alt="-" imgStyle={{ quality: 100 }} />
+                                                                {item?.link?.title?.toLowerCase()?.includes('resources') ?
+                                                                    (<div className='submenu-res-img position-absolute w-100 h-100 top-0 d-flex justify-content-center align-items-center'>
+                                                                        <GatsbyImage image={getImage(menuItem?.image?.localFile)} className='' alt="-" imgStyle={{ quality: 100 }} />
+                                                                    </div>) :
+                                                                    (<div className='submenu-img position-absolute bottom-0 w-100 h-100 left-center'>
+                                                                        <GatsbyImage image={getImage(menuItem?.image?.localFile)} className='w-100 h-100 object-cover' alt="-" imgStyle={{ quality: 100 }} />
+                                                                    </div>)
+                                                                }
+                                                            </div>
+                                                            <h1 className='fontXX leadingL res-fontLM tk-degular fw-medium fw-lg-normal tmb-30 dmb-10'>{menuItem?.heading}</h1>
+                                                            <span className='fontS leadingS tk-degular fw-normal opacity-50 d-none d-lg-block'>{menuItem?.description}</span>
+                                                        </Link>
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
-                                    </li>
-                                ))}
-                            </ul>
-                            <div className='col-3 col-xl-4 d-lg-none d-block'>
-                                <div className='d-flex flex-column justify-content-end'>
-                                    <a href={headerData?.rightSideButton?.link1?.url} className={`login fontXX leadingL tk-degular fw-semibold  text-decoration-none me-4 text-white tmb-60`}>
-                                        {headerData?.rightSideButton?.link1?.title}
-                                    </a>
-                                    <BookDemoBtn
-                                        data-bs-toggle={'modal'}
-                                        data-bs-target={"#contact_modal"}
-                                        extraClass='btn-border-white'
-                                        title={headerData?.rightSideButton?.link2?.title}
-                                        url={headerData?.rightSideButton?.link2?.url}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-3 col-xl-4  d-none d-lg-block'>
-                            <div className='d-flex align-items-center justify-content-end'>
-                                <a href={headerData?.rightSideButton?.link1?.url} className={`login fontXX leadingL tk-degular fw-semibold  text-decoration-none me-4 ${headerColor}`}>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className='col-3 col-xl-4 d-lg-none d-block'>
+                            <div className='d-flex flex-column justify-content-end'>
+                                <a href={headerData?.rightSideButton?.link1?.url} className='login fontXX leadingL tk-degular fw-semibold  text-decoration-none me-4 text-white tmb-40'>
                                     {headerData?.rightSideButton?.link1?.title}
                                 </a>
                                 <BookDemoBtn
                                     data-bs-toggle={'modal'}
                                     data-bs-target={"#contact_modal"}
-                                    extraClass={isHeaderFixed ? '' : borderBtnClass}
                                     title={headerData?.rightSideButton?.link2?.title}
+                                    url={headerData?.rightSideButton?.link2?.url}
                                 />
                             </div>
+                        </div>
+                    </div>
+                    <div className='col-3 d-none d-lg-block'>
+                        <div className='d-flex align-items-center justify-content-end'>
+                            <a href={headerData?.rightSideButton?.link1?.url} className='login fontXX leadingL tk-degular fw-semibold text-decoration-none me-4'>
+                                {headerData?.rightSideButton?.link1?.title}
+                            </a>
+                            <BookDemoBtn
+                                data-bs-toggle={'modal'}
+                                data-bs-target={"#contact_modal"}
+                                title={headerData?.rightSideButton?.link2?.title}
+                            />
                         </div>
                     </div>
                 </div>

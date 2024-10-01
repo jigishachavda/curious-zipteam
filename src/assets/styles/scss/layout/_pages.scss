@@ -1,352 +1,395 @@
 .dream-card-section {
-    .card-bg-images {
-        .card-bg-image {
-            height: 234px;
+  .card-bg-images {
+    .card-bg-image {
+      height: 234px;
 
-            .card-img {
-                width: 284px !important;
-                height: 187px !important;
-                border-radius: $radiusXL $radiusXL 0 0;
-            }
-        }
-
-        @include media-breakpoint-down(lg) {
-            &:last-child {
-                margin-bottom: 0px !important;
-            }
-        }
+      .card-img {
+        width: 284px !important;
+        height: 187px !important;
+        border-radius: $radiusXL $radiusXL 0 0;
+      }
     }
+
+    @include media-breakpoint-down(lg) {
+      &:last-child {
+        margin-bottom: 0px !important;
+      }
+    }
+  }
 }
 
 .build-team-section {
-    .team-cards {
-        @include media-breakpoint-down(lg) {
-            height: auto !important;
-        }
-
-        @include media-breakpoint-down(lg) {
-            &:last-child {
-                margin-bottom: 0px !important;
-            }
-        }
-
-        .team-img {
-            height: 77px !important;
-        }
+  .team-cards {
+    @include media-breakpoint-down(lg) {
+      height: auto !important;
     }
+
+    @include media-breakpoint-down(lg) {
+      &:last-child {
+        margin-bottom: 0px !important;
+      }
+    }
+
+    .team-img img {
+      height: 77px !important;
+      object-fit: contain !important;
+    }
+    
+    .team-img * {
+      width: fit-content !important;
+      max-width: 100% !important;
+      display: inline-flex !important;
+    }
+  }
 }
 
 .team-make-section {
+  @include media-breakpoint-down(lg) {
+    border-radius: 0 0 $radiusL $radiusL;
+    margin-bottom: -54px !important;
+    padding-bottom: 54px !important;
+  }
+
+  .team-make-img {
+    height: 565px;
+    width: 565px;
+
+    @include media-breakpoint-down(xl) {
+      width: 100%;
+    }
 
     @include media-breakpoint-down(lg) {
-        border-radius: 0 0 $radiusL $radiusL ;
-        margin-bottom: -54px !important;
-        padding-bottom: 54px !important;
+      height: 395px !important;
     }
 
-    .team-make-img {
-        height: 565px;
-        width: 565px;
-
-        @include media-breakpoint-down(xl) {
-            width: 100%;
-        }
-
-        @include media-breakpoint-down(lg) {
-            height: 395px !important;
-        }
-
-        @include media-breakpoint-down(md) {
-            height: 293px !important;
-        }
+    @include media-breakpoint-down(md) {
+      height: 293px !important;
     }
+  }
 
-    .list-round {
-        width: 8px !important;
-        height: 8px !important;
-    }
+  .list-round {
+    width: 8px !important;
+    height: 8px !important;
+  }
 }
 
 .fixed-section {
-    height: 60px;
-    width: 100% !important;
+  height: 60px;
+  width: 100% !important;
 
-    .fixed-btn {
-        width: auto !important;
-        height: 32px !important;
-        border: 1px solid #dedede;
+  .fixed-btn {
+    width: auto !important;
+    height: 32px !important;
+    border: 1px solid #dedede;
 
-        &.active {
-            background-color: $primary !important;
-            border: 0px !important;
-            color: #fff !important;
-        }
+    &.active {
+      background-color: $primary !important;
+      border: 0px !important;
+      color: #fff !important;
     }
+  }
 }
 
 .skill-section {
-    .accordion {
-        .accordion-item {
-            .accordion-button {
-                padding: 28px 22px 26px !important;
-
-                @include media-breakpoint-down(md) {
-                    padding: 22px 22px 24px 22px !important;
-                }
-            }
-
-            .accordion-body {
-                padding: 0px 44px 24px 22px !important;
-
-                @include media-breakpoint-down(md) {
-                    padding: 0px 22px 20px 22px !important;
-                }
-            }
-        }
-    }
-
-    .skill-img {
-        height: 565px !important;
-        width: 565px;
-
-        @include media-breakpoint-down(xl) {
-            width: 100%;
-        }
-
-        @include media-breakpoint-down(lg) {
-            height: 395px !important;
-        }
+  .accordion {
+    .accordion-item {
+      .accordion-button {
+        padding: 28px 22px 26px !important;
 
         @include media-breakpoint-down(md) {
-            height: 320px !important;
+          padding: 22px 22px 24px 22px !important;
         }
+      }
+
+      .accordion-body {
+        padding: 0px 44px 24px 22px !important;
+
+        @include media-breakpoint-down(md) {
+          padding: 0px 22px 20px 22px !important;
+        }
+      }
     }
+  }
+
+  .skill-img {
+    height: 565px !important;
+    width: 565px;
+
+    @include media-breakpoint-down(xl) {
+      width: 100%;
+    }
+
+    @include media-breakpoint-down(lg) {
+      height: 395px !important;
+    }
+
+    @include media-breakpoint-down(md) {
+      height: 320px !important;
+    }
+  }
 }
 
 .accordion {
-    --bs-accordion-active-bg: transparent !important;
-    --bs-accordion-bg: #fafafa !important;
-    --bs-accordion-border-color: transparent !important;
-    --bs-accordion-color: #000 !important;
+  --bs-accordion-active-bg: transparent !important;
+  --bs-accordion-bg: #fafafa !important;
+  --bs-accordion-border-color: transparent !important;
+  --bs-accordion-color: #000 !important;
 
-    .accordion-item {
-        border-radius: $radiusXX !important;
+  .accordion-item {
+    border-radius: $radiusXX !important;
 
-        &:last-child {
-            margin-bottom: 0 !important;
-        }
-
-        .accordion-button {
-            border-radius: $radiusXX !important;
-
-            &::after {
-                content: '';
-                background-image: url('../../assets/svg/solution/accordion-icon.svg') !important;
-                width: 30px !important;
-                height: 30px !important;
-                background-size: cover;
-                transition: transform 0.2s ease-in-out;
-
-                @include media-breakpoint-down(md) {
-                    width: 22px !important;
-                    height: 22px !important;
-                }
-            }
-
-            &[aria-expanded="true"] {
-                padding-bottom: 16px !important;
-
-                &::after {
-                    transform: rotate(180deg);
-                }
-            }
-
-            &[aria-expanded="false"] {
-                &::after {
-                    transform: rotate(0deg);
-                }
-            }
-        }
+    &:last-child {
+      margin-bottom: 0 !important;
     }
+
+    .accordion-button {
+      border-radius: $radiusXX !important;
+      font-size: $fontXM !important;
+
+      @include media-breakpoint-down(lg) {
+        font-size: $fontLM !important;
+      }
+
+      &::after {
+        content: "";
+        background-image: url("../../assets/svg/solution/accordion-icon.svg") !important;
+        width: 30px !important;
+        height: 30px !important;
+        background-size: cover;
+        transition: transform 0.2s ease-in-out;
+
+        @include media-breakpoint-down(md) {
+          width: 22px !important;
+          height: 22px !important;
+        }
+      }
+
+      &:not(.collapsed) {
+        color: $black !important;
+      }
+
+      &[aria-expanded="true"] {
+        padding-bottom: 16px !important;
+
+        &::after {
+          transform: rotate(180deg);
+        }
+      }
+
+      &[aria-expanded="false"] {
+        &::after {
+          transform: rotate(0deg);
+        }
+      }
+    }
+  }
 }
 
 .que-ans-section {
-    .accordion {
-        .accordion-item {
-            .accordion-button {
-                padding: 28px 15px 28px 46px;
+  .accordion {
+    .accordion-item {
+      .accordion-button {
+        padding: 28px 15px 28px 46px;
 
-                @include media-breakpoint-down(lg) {
-                    padding: 27px 21px;
-                }
-            }
-
-            .accordion-body {
-                padding: 0px 44px 33px 46px !important;
-
-                @include media-breakpoint-down(lg) {
-                    padding: 0 24px 45px 21px !important;
-                }
-            }
+        @include media-breakpoint-down(lg) {
+          padding: 27px 21px;
         }
+      }
+
+      .accordion-body {
+        padding: 0px 44px 33px 46px !important;
+
+        @include media-breakpoint-down(lg) {
+          padding: 0 24px 45px 21px !important;
+        }
+      }
     }
+  }
 }
 
 .get-start-section {
-    height: 253px !important;
+  height: fit-content !important;
+
+  .get-content {
+    padding-left: 63px !important;
+    padding-right: 63px !important;
 
     @include media-breakpoint-down(lg) {
-        height: auto !important;
+      padding-left: 25px !important;
+      padding-right: 25px !important;
     }
 
-    .get-content {
-        padding: 0px 63px !important;
+    .purple-img {
+      height: 394px !important;
+      border-radius: $radiusXX $radiusXX 0 0 !important;
 
-        @include media-breakpoint-down(lg) {
-            padding: 0px 42px !important;
-        }
-
-        .get-img {
-            height: 216px !important;
-            border-radius: $radiusXX $radiusXX 0 0 !important;
-
-            @include media-breakpoint-down(md) {
-                height: 195px !important;
-            }
-        }
+      @include media-breakpoint-down(lg) {
+        height: 280px !important;
+      }
     }
-}
 
-.build-team {
-    background: linear-gradient(to bottom, #F6F5F1, #fff);
-    border-radius: $radiusSX $radiusSX 0 0;
+    .get-img {
+      height: 280px !important;
+      border-radius: $radiusXX $radiusXX 0 0 !important;
+
+      @include media-breakpoint-down(md) {
+        height: 195px !important;
+      }
+    }
+  }
 }
 
 .solution-team {
-    background: linear-gradient(to bottom, #fff, #F6F5F1);
-    border-radius: 0 0 $radiusSX $radiusSX;
+  background: linear-gradient(to bottom, #fff, #f6f5f1);
+  border-radius: 0 0 $radiusSX $radiusSX;
 
-    @include media-breakpoint-down(md) {
-        border-radius: 0px !important;
-    }
+  @include media-breakpoint-down(md) {
+    border-radius: 0px !important;
+  }
 }
 
 .where-next-section {
-    border-radius: 0 0 $radiusL $radiusL !important;
-    margin-bottom: -54px !important;
+  border-radius: 0 0 $radiusL $radiusL !important;
+  margin-bottom: -54px !important;
 
-    @include media-breakpoint-down(lg) {
-        height: auto !important;
-        padding-bottom: 90px !important;
-        margin-bottom: -22px !important;
+  @include media-breakpoint-down(lg) {
+    height: auto !important;
+    padding-bottom: 90px !important;
+    margin-bottom: -22px !important;
+  }
+
+  .where-cards {
+    &:last-child {
+      @include media-breakpoint-down(lg) {
+        margin-bottom: 0px !important;
+      }
     }
 
-    .where-cards {
-        &:last-child {
-            @include media-breakpoint-down(lg) {
-                margin-bottom: 0px !important;
-            }
+    .where-card {
+      height: 345px !important;
+
+      @include media-breakpoint-down(md) {
+        height: 228px !important;
+      }
+
+      .where-img {
+        border-radius: $radiusXL $radiusXL 0 0 !important;
+
+        img {
+          width: 398px !important;
+          height: 265px !important;
+
+          @include media-breakpoint-down(md) {
+            width: 263px !important;
+            height: 175px !important;
+          }
         }
 
-        .where-card {
-            height: 345px !important;
-
-
-            @include media-breakpoint-down(md) {
-                height: 228px !important;
-            }
-
-
-
-            .where-img {
-                border-radius: $radiusXL $radiusXL 0 0 !important;
-
-                img {
-                    width: 398px !important;
-                    height: 265px !important;
-
-                    @include media-breakpoint-down(md) {
-                        width: 263px !important;
-                        height: 175px !important;
-                    }
-                }
-
-                .gatsby-image-wrapper {
-                    div {
-                        max-width: fit-content !important;
-                    }
-                }
-            }
+        .gatsby-image-wrapper {
+          div {
+            max-width: fit-content !important;
+          }
         }
+      }
     }
+  }
 }
 
 .blog-open-data {
-    .fixed-title {
-        top: 130px !important;
+  .fixed-title {
+    top: 130px !important;
+  }
+
+  .fixed-share-button {
+    padding-top: 285px !important;
+
+    @include media-breakpoint-down(lg) {
+      padding-top: 50px !important;
     }
+  }
 
-    .fixed-share-button {
-        padding-top: 469px !important;
+  .share-button {
+    padding: 10px 10px 10px 20px !important;
 
-        @include media-breakpoint-down(lg) {
-            padding-top: 0px !important;
-        }
+    .share-btn {
+      width: 24px;
+      height: 24px;
     }
-
-    .share-button {
-        padding: 10px 10px 10px 20px !important;
-
-        .share-btn {
-            width: 24px;
-            height: 24px;
-        }
-    }
+  }
 }
 
 .invalid-input.text-error {
-    color: red !important;
-    margin-top: -15px;
-    margin-bottom: 15px;
-    text-align: left;
-    padding-left: 30px;
+  color: red !important;
+  margin-top: -15px;
+  margin-bottom: 15px;
+  text-align: left;
+  padding-left: 30px;
 }
 
 .explore-btn {
-    animation: pulse 1.5s infinite;
+  animation: pulse 1.5s infinite;
 
-    @keyframes pulse {
-        0% {
-            -webkit-transform: translate(0, 0);
-            transform: translate(0, 0);
-        }
-
-        50% {
-            -webkit-transform: translate(0, 10px);
-            transform: translate(0, 10px);
-        }
-
-        100% {
-            -webkit-transform: translate(0, 0);
-            transform: translate(0, 0);
-        }
+  @keyframes pulse {
+    0% {
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0);
     }
+
+    50% {
+      -webkit-transform: translate(0, 10px);
+      transform: translate(0, 10px);
+    }
+
+    100% {
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0);
+    }
+  }
 }
 
 .animationOnClick {
-    opacity: 0;
-    animation: moveObject 0.5s ease-in-out forwards;
+  opacity: 0;
+  animation: moveObject 0.5s ease-in-out forwards;
 
-    @keyframes moveObject {
-        0% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 1;
-        }
+  @keyframes moveObject {
+    0% {
+      opacity: 0;
     }
+
+    100% {
+      opacity: 1;
+    }
+  }
 }
-.page-not-found{
-    height: 100vh;
+.page-not-found {
+  height: 100vh;
+}
+
+.iframe-block {
+  height: 630px !important;
+
+  @include media-breakpoint-down(xl) {
+    height: 650px !important;
+  }
+  @include media-breakpoint-down(lg) {
+    height: 585px !important;
+  }
+
+  @include media-breakpoint-down(md) {
+    height: 350px !important;
+  }
+
+  & * {
+    height: 100%;
+  }
+  p {
+    margin-bottom: 0px !important;
+  }
+}
+iframe {
+  width: 100%;
+  position: initial !important;
+}
+.loading {
+  height: 100vh;
 }

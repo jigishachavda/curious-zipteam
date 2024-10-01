@@ -1,12 +1,12 @@
-@import 'variables';
+@import "variables";
 
 body,
 html {
-    margin: 0px;
-    padding: 0px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #000;
+  margin: 0px;
+  padding: 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #000;
 }
 
 h1,
@@ -15,215 +15,214 @@ h3,
 h4,
 h5,
 h6 {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 body {
-    overflow-x: hidden;
-    // background-color: $secondary;
+  overflow-x: hidden;
+  // background-color: $secondary;
 }
 
 button:focus {
-    outline: none !important;
-    box-shadow: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .object-cover {
-    object-fit: cover;
-    object-position: center;
+  object-fit: cover;
+  object-position: center;
 }
 
 .list-none {
-    list-style: none;
+  list-style: none;
 }
 
 // TRANSITION AND TRANSFORM GLOBAL CSS
 .transition {
-    transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .rotate-circle {
-    transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .rotate-circle-hover {
-    &:hover {
-        transform: rotate(90deg);
-    }
+  &:hover {
+    transform: rotate(90deg);
+  }
 }
 
 .rotate-circle-nagative {
-    transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
 // INPUT CSS GLOBAL
 input,
 textarea {
-    outline: none !important;
+  outline: none !important;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    display: none;
+  display: none;
 }
 
 textarea {
-    resize: none;
+  resize: none;
 }
 
 // POSITION GLOBAL CSS
-.p-initial {
-    @include media-breakpoint-down(lg) {
-        position: initial !important;
-    }
+@include media-breakpoint-down(lg) {
+  .p-initial {
+    position: initial !important;
+  }
 }
 
 .p-xl-initial {
-    @include media-breakpoint-down(xl) {
-        position: initial !important;
-    }
+  @include media-breakpoint-down(xl) {
+    position: initial !important;
+  }
 }
 
 .top-left-center {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .top-center {
-    top: 50%;
-    transform: translateY(-50%);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .left-center {
-    left: 50%;
-    transform: translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 // SCROLLBAR AND SELECTION GLOBAL CSS
 ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+  width: 0;
+  height: 0;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: transparent;
+  background: transparent;
 }
 
 ::selection {
-    color: $white;
-    background: $black;
+  color: $white;
+  background: $black;
 }
 
 .radius-bottom-right {
-    border-radius: 0 0 $radiusL $radiusL;
+  border-radius: 0 0 $radiusL $radiusL;
 }
 
 @include media-breakpoint-down(lg) {
-    .tpb-0 {
-        padding-bottom: 0px !important;
-    }
+  .tpb-0 {
+    padding-bottom: 0px !important;
+  }
 }
 
 a {
-    cursor: pointer !important;
+  cursor: pointer !important;
 }
 
 .dmb-null {
+  margin-bottom: 0px !important;
+}
+
+@for $i from 1 through 70 {
+  .dmt-#{$i*5} {
+    margin-top: #{5 * $i}px;
+  }
+}
+
+@for $i from 1 through 70 {
+  .dmb-#{$i*5} {
+    margin-bottom: #{5 * $i}px;
+  }
+}
+
+@media (max-width: 991px) {
+  @for $i from 1 through 70 {
+    .tmt-#{$i*5} {
+      margin-top: #{5 * $i}px;
+    }
+  }
+
+  @for $i from 1 through 70 {
+    .tmb-#{$i*5} {
+      margin-bottom: #{5 * $i}px;
+    }
+  }
+
+  .tmb-null {
     margin-bottom: 0px !important;
+  }
 }
 
-@for $i from 1 through 70 {
-    .dmt-#{$i*5} {
-        margin-top: #{5*$i}px;
+@media (max-width: 767px) {
+  @for $i from 1 through 70 {
+    .mmt-#{$i*5} {
+      margin-top: #{5 * $i}px;
     }
-}
+  }
 
-@for $i from 1 through 70 {
-    .dmb-#{$i*5} {
-        margin-bottom: #{5*$i}px;
+  @for $i from 1 through 70 {
+    .mmb-#{$i*5} {
+      margin-bottom: #{5 * $i}px;
     }
-}
+  }
 
-@media(max-width: 991px) {
-    @for $i from 1 through 70 {
-        .tmt-#{$i*5} {
-            margin-top: #{5*$i}px;
-        }
-    }
-
-    @for $i from 1 through 70 {
-        .tmb-#{$i*5} {
-            margin-bottom: #{5*$i}px;
-        }
-    }
-
-    .tmb-null {
-        margin-bottom: 0px !important;
-    }
-}
-
-@media(max-width: 767px) {
-    @for $i from 1 through 70 {
-        .mmt-#{$i*5} {
-            margin-top: #{5*$i}px;
-        }
-    }
-
-    @for $i from 1 through 70 {
-        .mmb-#{$i*5} {
-            margin-bottom: #{5*$i}px;
-        }
-    }
-
-    .mmb-null {
-        margin-bottom: 0px !important;
-    }
-
+  .mmb-null {
+    margin-bottom: 0px !important;
+  }
 }
 
 // CUSTOM PADDING
 
 @for $i from 1 through 70 {
-    .dpt-#{$i*5} {
-        padding-top: #{5*$i}px;
-    }
+  .dpt-#{$i*5} {
+    padding-top: #{5 * $i}px;
+  }
 }
 
 @for $i from 1 through 70 {
-    .dpb-#{$i*5} {
-        padding-bottom: #{5*$i}px;
-    }
+  .dpb-#{$i*5} {
+    padding-bottom: #{5 * $i}px;
+  }
 }
 
-@media(max-width: 991px) {
-    @for $i from 1 through 70 {
-        .tpt-#{$i*5} {
-            padding-top: #{5*$i}px !important;
-        }
+@media (max-width: 991px) {
+  @for $i from 1 through 70 {
+    .tpt-#{$i*5} {
+      padding-top: #{5 * $i}px !important;
     }
+  }
 
-    @for $i from 1 through 70 {
-        .tpb-#{$i*5} {
-            padding-bottom: #{5*$i}px !important;
-        }
+  @for $i from 1 through 70 {
+    .tpb-#{$i*5} {
+      padding-bottom: #{5 * $i}px !important;
     }
+  }
 }
 
-@media(max-width: 767px) {
-    @for $i from 1 through 70 {
-        .mpt-#{$i*5} {
-            padding-top: #{5*$i}px !important;
-        }
+@media (max-width: 767px) {
+  @for $i from 1 through 70 {
+    .mpt-#{$i*5} {
+      padding-top: #{5 * $i}px !important;
     }
+  }
 
-    @for $i from 1 through 70 {
-        .mpb-#{$i*5} {
-            padding-bottom: #{5*$i}px !important;
-        }
+  @for $i from 1 through 70 {
+    .mpb-#{$i*5} {
+      padding-bottom: #{5 * $i}px !important;
     }
+  }
 }

@@ -14,6 +14,15 @@ export const useBlog = () => {
                         seo {
                             title
                             metaDesc
+                            opengraphTitle
+                            opengraphDescription
+                            opengraphImage {
+                                mediaItemUrl
+                            }
+                            opengraphUrl
+                            schema {
+                                raw
+                            }
                         }
                         slug
                         link
@@ -23,7 +32,20 @@ export const useBlog = () => {
                                 name
                             }
                         }
+                        content
+                        featuredImage {
+                            node {
+                                caption
+                                mediaItemUrl
+                                localFile {
+                                    childImageSharp {
+                                        gatsbyImageData(quality: 90, formats: NO_CHANGE, placeholder: BLURRED)
+                                    }
+                                }
+                            }
+                        }
                         ACF_blogpage {
+                            fieldGroupName
                             prefix
                             time
                             flexibleContent {
@@ -40,9 +62,12 @@ export const useBlog = () => {
                                 }
                                 ... on WpPost_AcfBlogpage_FlexibleContent_Image {
                                     image {
+                                        mediaItemUrl
+                                        altText
+                                        mimeType
                                         localFile {
                                             childImageSharp {
-                                                gatsbyImageData
+                                               gatsbyImageData(quality: 90, formats: NO_CHANGE, placeholder: BLURRED)
                                             }
                                         }
                                     }

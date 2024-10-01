@@ -1,0 +1,71 @@
+.privacy-content {
+  font-family: "degular", sans-serif;
+  p {
+    font-size: $fontXX;
+    line-height: $leadingXS;
+  }
+  h2 {
+    font-size: $fontXM;
+    line-height: $leadingXS;
+    font-weight: 600;
+    margin-bottom: 25px;
+    margin-top: 50px;
+  }
+  .legal-list-numeral-ol {
+    @include media-breakpoint-down(lg) {
+      padding-left: 20px;
+    }
+    .legal-list-item-ol {
+      margin-bottom: 15px;
+    }
+  }
+  ol {
+    @include media-breakpoint-down(lg) {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 50px;
+
+      @include media-breakpoint-down(lg) {
+        margin-bottom: 30px;
+      }
+
+      ul {
+        padding-left: 0px;
+        margin-top: 15px;
+        list-style: none;
+        li {
+          margin-bottom: 10px;
+
+          ul {
+            padding-left: 40px;
+            margin-top: 20px;
+            list-style: disc;
+
+            @include media-breakpoint-down(lg) {
+              padding-left: 25px;
+            }
+          }
+        }
+      }
+    }
+  }
+  table {
+    tr {
+      th {
+        vertical-align: top;
+      }
+    }
+  }
+}
+.roman-number {
+  list-style: lower-roman;
+}
+.sqaure-list {
+  list-style: square;
+  li {
+    ul {
+      list-style: disc;
+    }
+  }
+}

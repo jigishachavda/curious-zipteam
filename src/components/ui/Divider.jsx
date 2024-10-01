@@ -1,9 +1,13 @@
 import React from 'react'
 
-const Divider = ({ desktop, tablet, mobile }) => {
+const Divider = ({ contentSection }) => {
     return (
         <>
-            <div className={`dmb-${desktop} tmb-${tablet} mmb-${mobile}`}></div>
+            {contentSection &&
+                (
+                    <div className={`dmb-${contentSection.desktop.marginBottom} tmb-${contentSection.tablet.marginBottom} mmb-${contentSection.mobile.marginBottom}`}></div>
+                )
+            }
         </>
     )
 }

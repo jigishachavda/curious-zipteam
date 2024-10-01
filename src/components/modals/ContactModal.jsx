@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modals from '../ui/Modals';
-import { API } from '../../services';
 import { apiConfig } from '../../configs';
 import { ToastContainer, toast } from 'react-toastify';
 import Validators from '../common/validations/Validator';
 import TextInput from '../ui/TextInput';
 import Svg from '../ui/Svg';
+import { useConfig } from '../../hooks/custom/useConfig';
+import axios from "axios";
+import { useStaticQuery, graphql } from "gatsby";
 
 const rules = {
     'your-name': 'required',
@@ -14,6 +16,26 @@ const rules = {
 }
 
 const ContactModal = ({ onClose }) => {
+    const data = useConfig();
+    const siteMetadata = useStaticQuery(graphql`
+        query {
+          site {
+            siteMetadata {
+              contactFormName
+            }
+          }
+        }
+      `);
+
+    const [contactFormPostId, setContactFormPostId] = useState(null)
+
+    useEffect(() => {
+        if (data.wp.contactForms) {
+            let contactForm = data?.wp?.contactForms?.find(e => e.title === siteMetadata?.site?.siteMetadata?.contactFormName);
+            setContactFormPostId(contactForm?.id)
+        }
+    }, [data?.wp?.contactForms])
+
     const initialFormData = {
         'your-name': '',
         'your-email': '',
@@ -28,8 +50,10 @@ const ContactModal = ({ onClose }) => {
         for (const [key, value] of Object.entries(formData)) {
             form.append(String(key), value);
         }
+        
+        form.append('_wpcf7_unit_tag', 'wpcf7-f' + contactFormPostId + '-123');
 
-        API.post(apiConfig.submitContact, form)
+        axios.post(`${data.wp.generalSettings.url}/${apiConfig.submitContact.replace('{post_id}', contactFormPostId)}`, form)
             .then((response) => {
                 toast.success('Form submitted successfully');
                 setFormData(initialFormData);
@@ -52,12 +76,12 @@ const ContactModal = ({ onClose }) => {
                 return (
                     <>
                         <Modals modalClass={'contact-modal'} id={'contact_modal'} >
-                            <div className='tpt-215 tpb-100 overflow-auto'>
-                                <h4 className='tk-degular fontSS leadingSS text-dark fw-semibold dmb-20 res-text-white overflow-auto'>
-                                    Ready to book a  <span className='text-blue res-text-white'> Demo? </span>
+                            <div className='tpt-150 tpb-100'>
+                                <h4 className='tk-degular fontSS leadingSS textdark fw-semibold dmb-20 res-text-white'>
+                                    Ready to book a  <span className='textblue res-text-white'> Demo? </span>
                                 </h4>
-                                <h5 className='tk-degular fontS leadingM text-black fw-normal dmb-30 tmb-35 res-text-white'>
-                                    Embrace organisational agility, the company was able to adapt technologies to help the leader make informed decisions and efficiently plan teams based on skills data.
+                                <h5 className='tk-degular fontS leadingM textdark fw-normal dmb-30 tmb-35 res-text-white'>
+                                    Discover how Zipteam empowers companies to boost organizational agility. Book your demo today and see it in action!
                                 </h5>
                                 <form className='form-div dmb-30 tmb-15'>
                                     <TextInput
@@ -87,7 +111,7 @@ const ContactModal = ({ onClose }) => {
                                         onChange={onChange}
                                         error={errors}
                                     />
-                                    <button type="button" className='tk-degular fontXX leadingXX text-white d-flex align-items-center   justify-content-center btnA btnX rounded-5 mx-auto' onClick={() => onSubmit(handleSubmit)}>
+                                    <button type="button" className='tk-degular fontXX leadingXX text-white d-flex align-items-center justify-content-center btnA btnX rounded-5 mx-auto' onClick={() => onSubmit(handleSubmit)}>
                                         <span>Book a demo</span>
                                         <Svg ButtonArrow />
                                     </button>

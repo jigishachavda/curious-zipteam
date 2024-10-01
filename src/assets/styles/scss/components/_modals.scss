@@ -69,7 +69,7 @@
                         }
                     }
 
-                    .btn {
+                    .btnA {
                         @include media-breakpoint-down(lg) {
                             border-color: $white;
                             width: 190px;

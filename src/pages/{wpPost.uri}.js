@@ -1,25 +1,41 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import Layout from '../layout';
-import { removeTags, setInitialState } from '../utils/helpers';
+import { setInitialState } from '../utils/helpers';
 import Svg from '../components/ui/Svg';
 import Aos from 'aos';
 import { Link } from 'gatsby';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { HELPER } from '../services';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import BlogCards from '../components/templates/blog/BlogCards';
 import { useBlog } from '../hooks/pages/useBlog';
-import Divider from '../components/ui/Divider';
-import { usePageBuilder } from '../hooks/pages/usePageBuilder';
+import BlogImage from '../components/templates/blogSections/BlogImage';
+import BlogHeading from '../components/templates/blogSections/BlogHeading';
+import BlogContent from '../components/templates/blogSections/BlogContent';
+import BlogList from '../components/templates/blogSections/BlogList';
 
-const BlogTemplate = () => {
+const BlogTemplate = ({ location }) => {
     const data = useBlog();
-    const data2 = usePageBuilder();
-    const nodes = data2.allWpPage.nodes
-    const contentSection = nodes[0].ACF_builderpage.contentSection
     let state = setInitialState();
-    const postdata = state?.post?.node.ACF_blogpage
-    const slug = state?.post?.slug
+
+    let postdata = null;
+    let slug = null;
+
+    console.log('state', state);
+
+
+    if (state && state?.post?.node?.ACF_blogpage) {
+        postdata = state?.post?.node?.ACF_blogpage
+        slug = state?.post?.node?.slug
+    } else {
+        let _postBlogPageNode = data.allWpPost.edges.find(e => e.node.link === location.pathname)
+        postdata = _postBlogPageNode?.node?.ACF_blogpage
+        slug = _postBlogPageNode?.slug
+        state = {
+            post: { ..._postBlogPageNode }
+        }
+
+    }
 
     const goTopPage = () => {
         if (typeof window !== 'undefined') {
@@ -37,7 +53,7 @@ const BlogTemplate = () => {
         Aos.refresh();
 
         HELPER.addSlugToBody(slug);
-    }, []);
+    }, [slug]);
 
     useLayoutEffect(() => {
         // main-share
@@ -72,132 +88,107 @@ const BlogTemplate = () => {
         _tag_id: i + 1,
     }));
 
-
     const allPostsCategory =
-        data.allWpCategory.nodes.length > 0
-            ? data.allWpCategory.nodes[0].name
+        data?.allWpCategory?.nodes?.length > 0
+            ? data?.allWpCategory?.nodes[0]?.name
             : null;
-    const [selectedCategory, setSelectedCategory] = useState(allPostsCategory);
-    const [visiblePosts, setVisiblePosts] = useState(3);
-    const [animationActive, setAnimationActive] = useState(false);
+    const [selectedCategory] = useState(allPostsCategory);
+    const [visiblePosts] = useState(3);
+    const [animationActive] = useState(false);
+
+    const blogSections = (blogData) => {
+        const [key, value] = Object.entries(blogData)[0];
+        switch (key) {
+            case 'image':
+                return <BlogImage data={value} />
+
+            case 'heading':
+                return <BlogHeading data={value} />
+
+            case 'content':
+                return <BlogContent data={value} />
+
+            case 'lists':
+                return <BlogList data={value} />
+
+            default:
+                break;
+        }
+    }
 
     return (
         <>
             <Layout>
                 <Helmet>
-                    <title>{state?.post?.node.seo.title}</title>
-                    <meta name="description" content={state?.post?.node.seo.metaDesc} />
+                    <title>{state?.post?.node?.seo?.title}</title>
+                    <meta name="description" content={state?.post?.node?.seo?.metaDesc} />
+                    <meta property="og:title" content={state?.post?.node?.seo?.opengraphTitle} />
+                    <meta property="og:description" content={state?.post?.node?.seo?.opengraphDescription} />
+                    <meta property="og:image" content={state?.post?.node?.seo?.opengraphImage?.mediaItemUrl} />
+                    <meta property="og:url" content={state?.post?.node?.seo?.opengraphUrl} />
+                    <meta property="og:type" content="article" />
                 </Helmet>
-                <section className='blog-open-data dmt-170'>
+                <section className='blog-open-data dmt-170 dmb-220 tmb-120'>
                     <div className='container containerS'>
-                        <div className='row flex-lg-row  flex-column-reverse'>
+                        <div className='row flex-lg-row flex-column-reverse'>
                             <div className='col-lg-2 tmt-50'>
-                                <Link to='/blog-post/' className='z-1 text-decoration-none d-lg-inline-block d-none position-sticky p-initial top-0 fontXX leadingL res-fontM tk-degular fw-medium text-gray fixed-title tmb-25 dmb-90'>Go back</Link>
-                                <div className='position-sticky top-0 fixed-share-button d-lg-block share-social'>
-                                    <button className='share-button d-flex bg-shareGray border-0 radiusSX position-relative'>
-                                        <span className='fontXX leadingL tk-degular fw-medium'>Share this</span>
-                                        <span className='share-btn bg-primary radiusSX d-flex justify-content-center align-items-center ms-2'><Svg shareBtn /></span>
-                                        <div className='main-share d-flex align-items-center position-absolute start-0 w-100 justify-content-lg-center p-0 m-0'>
-                                        </div>
-                                    </button>
+                                <div className='position-sticky sticky-links'>
+                                    <Link to='/blog/' className='z-1 text-decoration-none d-lg-inline-block d-none fontXX leadingL res-fontM tk-degular fw-medium textgray fixed-title tmb-25 dmb-90'>Go back</Link>
+                                    <div className='fixed-share-button d-lg-block share-social'>
+                                        <button className='share-button d-flex bg-shareGray border-0 radiusSX position-relative'>
+                                            <span className='fontXX leadingL tk-degular fw-medium'>Share this</span>
+                                            <span className='share-btn bgprimary radiusSX d-flex justify-content-center align-items-center ms-2'><Svg shareBtn /></span>
+                                            <div className='main-share d-flex align-items-center position-absolute start-0 w-100 justify-content-lg-center p-0 m-0'>
+                                            </div>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div className='col-lg-9 col-xl-8 px-1 me-lg-auto ms-lg-0 mx-auto'>
-                                <Link to='/blog-post/' className='z-1 text-decoration-none position-sticky p-initial top-0 fontXX leadingL res-fontM tk-degular fw-medium text-gray fixed-title d-lg-none'>Go back</Link>
-                                <h4 className='text-black tk-degular fw-normal fontXX d-none d-lg-block dmb-30' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500">{postdata?.prefix}</h4>
-                                <h1 className='text-black tk-degular fw-semibold fontSM res-fontSX tmb-25 dmb-15 tmt-25' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500">
-                                    {postdata?.flexibleContent[0]?.heading}
-                                </h1>
-                                <label className='text-black fontX d-flex tk-degular blog-label fw-medium align-items-center p-2 radiusXL border-grayOne border lh-1 tmb-35 dmb-75' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500">
-                                    <span className='bg-primary me-2 ms-1 d-block rounded-circle rounded-icon'></span>
-                                    <h6 className='me-1'>{postdata?.time}</h6>
-                                </label>
-                                <div className='blog-open-img overflow-hidden radiusXX dmt-75 dmb-60' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500">
-                                    <GatsbyImage image={getImage(postdata?.flexibleContent[1]?.image?.localFile)} className='w-100 h-100 object-cover' alt='' />
-                                </div>
-
+                                <Link to='/blog/' className='z-1 text-decoration-none p-initial top-0 fontXX leadingL res-fontM tk-degular fw-medium textgray fixed-title d-lg-none'>Go back</Link>
+                                {postdata?.prefix && (
+                                    <h4 className='text-black tk-degular fw-normal fontXX d-none d-lg-block dmb-30' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500">{postdata?.prefix}</h4>
+                                )}
+                                {state?.post?.node?.title && (
+                                    <h1 className='text-black tk-degular fw-semibold fontSM res-fontSX tmb-25 dmb-15 tmt-25' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500">
+                                        {state?.post?.node?.title}
+                                    </h1>
+                                )}
+                                {postdata?.time && (
+                                    <label className='text-black fontX d-flex tk-degular blog-label fw-medium align-items-center p-2 radiusXL border-grayOne border lh-1 tmb-35 dmb-75' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500">
+                                        <span className='bgprimary me-2 ms-1 d-block rounded-circle rounded-icon'></span>
+                                        <h6 className='me-1'>{postdata?.time}</h6>
+                                    </label>
+                                )}
+                                {state?.post?.node?.featuredImage && (
+                                    <div className='blog-open-img overflow-hidden radiusXX dmt-75 dmb-15' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500">
+                                        {state?.post?.node?.featuredImage?.node?.localFile?.childImageSharp ? (
+                                            <GatsbyImage image={getImage(state?.post?.node?.featuredImage?.node?.localFile)} className='w-100 h-100 object-cover' alt='' imgStyle={{ quality: 100 }} />
+                                        ) : (
+                                            <img src={state?.post?.node?.featuredImage?.node?.mediaItemUrl} className='w-100 h-100 object-cover' alt='' />
+                                        )}
+                                    </div>
+                                )}
                                 <div className='col-lg-10 mx-auto px-lg-4' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500">
-                                    <div className='tpb-30 dpb-25'>
-                                        <h4 className='tk-degular fw-medium text-black fontXS res-fontLM res-leadingXS leadingXM tmb-35 dmb-25'>
-                                            {removeTags(postdata?.flexibleContent[2]?.content)}
-                                        </h4>
-                                        <h6 className='tk-degular text-black fw-normal fontXX leadingXS tpb-35 dpb-25'
-                                            dangerouslySetInnerHTML={{ __html: postdata?.flexibleContent[3]?.lists[0]?.list?.replace(/<div/g, "<div className='dmb-25'").replace(/&nbsp;/g, '') }}
-                                        >
-                                        </h6>
-                                        <div className='tk-degular text-black fw-normal fontXX leadingXS dmb-25' dangerouslySetInnerHTML={{
-                                            __html: postdata?.flexibleContent[3]?.lists[1]?.list?.replace(
-                                                /<div(?!.*?class=['"])/,
-                                                "<div class='tmb-30 dmb-25 fontXS fw-medium'"
-                                            ).replace(
-                                                /(<\/?div(?! class)(.*?)>)/g,
-                                                (match, p1) => {
-                                                    return p1.startsWith('<div') ? `<div class='tmb-30 dmb-25'>` : `</div>`;
-                                                }
-                                            ).replace(
-                                                /&nbsp;/g,
-                                                ''
-                                            )
-                                        }}></div>
-                                    </div>
-                                    <div className='tpb-60 dpb-45'>
-                                        <div className='open-blog-images radiusXL overflow-hidden'>
-                                            <img src={postdata?.flexibleContent[4]?.image?.mediaItemUrl} className='w-100 h-100 object-cover' alt='' />
+                                    {state?.post?.node?.featuredImage?.node?.caption && (
+                                        <div className='text-black opacity-50 tk-degular fw-normal fontM leadingM d-none d-lg-block dmb-60 tmb-30 text-center' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500" dangerouslySetInnerHTML={{ __html: state?.post?.node?.featuredImage?.node?.caption }}></div>
+                                    )}
+                                    {postdata?.flexibleContent && postdata?.flexibleContent.map((element, i) => (
+                                        <div key={i}>
+                                            {blogSections(element)}
                                         </div>
-                                    </div>
-                                    <div className='tpb-15 dpb-25'>
-                                        <h6 className='tk-degular text-black fw-normal fontXX leadingXS'
-                                            dangerouslySetInnerHTML={{
-                                                __html: postdata?.flexibleContent[5]?.lists[0]?.list?.replace(
-                                                    /<div(?!.*?class=['"])/,
-                                                    "<div class='tmb-30 dmb-25 fontXS fw-medium'"
-                                                ).replace(
-                                                    /(<\/?div(?! class)(.*?)>)/g,
-                                                    (match, p1) => {
-                                                        return p1.startsWith('<div') ? `<div class='tmb-30 dmb-25'>` : `</div>`;
-                                                    }
-                                                ).replace(
-                                                    /<ul/g,
-                                                    "<ul class='ps-4'"
-                                                ).replace(
-                                                    /<li(?!.*?class=['"])/g,
-                                                    "<li class='ps-2 dmb-20'"
-                                                ).replace(
-                                                    /&nbsp;/g,
-                                                    ''
-                                                )
-                                            }}
-                                        >
-                                        </h6>
-                                    </div>
-                                    <div className=''>
-                                        <div className='tk-degular text-black fw-normal fontXX leadingXS' dangerouslySetInnerHTML={{
-                                            __html: postdata?.flexibleContent[5]?.lists[1]?.list?.replace(
-                                                /<div(?!.*?class=['"])/,
-                                                "<h5 class='tmb-30 dmb-25 fontXS fw-medium'"
-                                            ).replace(
-                                                /(<\/?div(?! class)(.*?)>)/g,
-                                                (match, p1) => {
-                                                    return p1.startsWith('<div') ? `<div class='tmb-30 fontXX fw-medium dmt-25'>` : `</div>`;
-                                                }
-                                            ).replace(
-                                                /&nbsp;/g,
-                                                ''
-                                            )
-                                        }}></div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <Divider desktop={contentSection[3].desktop.marginBottom} tablet={contentSection[3].tablet.marginBottom} mobile={contentSection[3].mobile.marginBottom} />
                 <div className='container'>
                     <div className='row'>
                         <div className='d-flex justify-content-between mmb-40 dmb-60'>
-                            <h1 className='fontSL leadingMX res-fontSM res-leadingSS tk-degular fw-semibold'>{contentSection[4].heading}</h1>
-                            <a href='/blog-post/' onClick={goTopPage} className='tk-degular fontXX leadingXX text-white d-md-flex align-items-center justify-content-center btn btnX rounded-5 d-none'>View all posts</a>
-                            </div>
+                            <h1 className='fontSL leadingMX res-fontSM res-leadingSS tk-degular fw-semibold'>Keep Reading</h1>
+                            <a href='/blog/' onClick={goTopPage} className='text-decoration-none tk-degular fontXX leadingXX text-white d-md-flex align-items-center justify-content-center btnA btnX rounded-5 d-none'>View all posts</a>
+                        </div>
                         <BlogCards
                             BlogCards={BlogCardsData}
                             selectedCategory={selectedCategory}
@@ -205,11 +196,11 @@ const BlogTemplate = () => {
                             animationActive={animationActive}
                         />
                         <div className='d-flex align-items-center justify-content-center mmb-60'>
-                            <a href='/blog-post/' className='tk-degular fontXX leadingXX text-white d-flex align-items-center justify-content-center btn btnX rounded-5 d-md-none'>View all posts</a>
+                            <a href='/blog/' className='text-decoration-none tk-degular fontXX leadingXX text-white d-inline-flex align-items-center justify-content-center btnA btnX rounded-5 d-md-none'>View all posts</a>
                         </div>
                     </div>
                 </div>
-            </Layout>
+            </Layout >
         </>
     )
 }

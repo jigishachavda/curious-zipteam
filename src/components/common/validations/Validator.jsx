@@ -28,11 +28,11 @@ const _registerFileuploadValidations = () => {
   Validator.register(
     "mimes",
     function (value, requirement, attribute) {
-      if (typeof value == 'string') {
+      if (typeof value === 'string') {
         return true;
       }
 
-      const allowedExtensions = requirement ? requirement.split(','): [];
+      const allowedExtensions = requirement ? requirement.split(',') : [];
       const fileExtension = value.name.split('.').pop();
       if (!allowedExtensions.includes(fileExtension)) {
         return false;
@@ -42,18 +42,18 @@ const _registerFileuploadValidations = () => {
     "The :attribute must be a file of type :mime_types"
   );
 
-Validator.register(
+  Validator.register(
     "max_file_size",
     function (value, requirement, attribute) {
-        if (typeof value == 'string') {
-          return true;
-        }
+      if (typeof value === 'string') {
+        return true;
+      }
 
-        if (value.size > Number(requirement)) {
-            return false;
-        }
+      if (value.size > Number(requirement)) {
+        return false;
+      }
 
-        return true
+      return true
     },
     "Max file size is :max_size"
   );
@@ -61,15 +61,15 @@ Validator.register(
   Validator.register(
     "min_file_size",
     function (value, requirement, attribute) {
-        if (typeof value == 'string') {
-          return true;
-        }
+      if (typeof value === 'string') {
+        return true;
+      }
 
-        if (value.size < Number(requirement)) {
-            return false;
-        }
+      if (value.size < Number(requirement)) {
+        return false;
+      }
 
-        return true
+      return true
     },
     "Min file size is :min_size"
   );
@@ -77,25 +77,25 @@ Validator.register(
 
 const imageValidationMessagesModification = (errors, rules) => {
   for (let [field, errorMsgs] of Object.entries(errors)) {
-      errors[field] = errorMsgs.map(messages => {
-          if (messages.includes(':mime_types')) {
+    errors[field] = errorMsgs.map(messages => {
+      if (messages.includes(':mime_types')) {
 
-              let attributeMimeTypes = rules[field].split('|').find(e => e.includes('mimes')).replace('mimes:', '')
-              messages = messages.replace(':mime_types', attributeMimeTypes).replace(':attribute', field)
-          }
+        let attributeMimeTypes = rules[field].split('|').find(e => e.includes('mimes')).replace('mimes:', '')
+        messages = messages.replace(':mime_types', attributeMimeTypes).replace(':attribute', field)
+      }
 
-          if (messages.includes(':max_size')) {
-              let attributeValue = rules[field].split('|').find(e => e.includes('max_file_size')).replace('max_file_size:', '')
-              messages = messages.replace(':max_size', formatBytes(attributeValue))
-          }
+      if (messages.includes(':max_size')) {
+        let attributeValue = rules[field].split('|').find(e => e.includes('max_file_size')).replace('max_file_size:', '')
+        messages = messages.replace(':max_size', formatBytes(attributeValue))
+      }
 
-          if (messages.includes(':min_size')) {
-              let attributeValue = rules[field].split('|').find(e => e.includes('min_file_size')).replace('min_file_size:', '')
-              messages = messages.replace(':min_size', formatBytes(attributeValue))
-          }
+      if (messages.includes(':min_size')) {
+        let attributeValue = rules[field].split('|').find(e => e.includes('min_file_size')).replace('min_file_size:', '')
+        messages = messages.replace(':min_size', formatBytes(attributeValue))
+      }
 
-          return messages;
-      });
+      return messages;
+    });
   }
 
   return errors;
@@ -113,18 +113,18 @@ export default function Validators({
   rules = {},
   children,
 }) {
-  let _formData = {...formData}
-  
+  let _formData = { ...formData }
+
   const [submitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     if (submitted) {
       let _isValidationFail = isValidationFail();
-      if (false == _isValidationFail) {
+      if (false === _isValidationFail) {
         setErrors({});
       }
     }
-  }, [formData]);
+  }, [formData, submitted]);
 
   const [errors, setErrors] = useState(null);
 
@@ -136,7 +136,7 @@ export default function Validators({
 
   const onSubmit = (callback) => {
     let isValidationFailed = isValidationFail();
-    if (false == isValidationFailed) {
+    if (false === isValidationFailed) {
       setErrors({});
       callback(_formData);
       setIsSubmitted(false);

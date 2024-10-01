@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Svg = ({ rotated, menuIcon, ButtonArrow, ButtonWhiteArrow, rightArrow, rightWhiteArrow, shareBtn, blackLogo, whiteLogo, angleDonwBlack, angleDonwWhite, resMenuClose, downArrow, modalClose, resModalClose }) => {
+const Svg = ({ menuIcon, ButtonArrow, ButtonWhiteArrow, rightArrow, rightWhiteArrow, shareBtn, blackLogo, whiteLogo, angleDonwBlack, angleDonwWhite, resMenuClose, downArrow, modalClose, resModalClose }) => {
     return (
         <>
             {menuIcon &&
@@ -85,12 +85,12 @@ const Svg = ({ rotated, menuIcon, ButtonArrow, ButtonWhiteArrow, rightArrow, rig
                 </svg>
             }
             {angleDonwBlack &&
-                <svg xmlns="http://www.w3.org/2000/svg" width="9.71" height="6.997" viewBox="0 0 9.71 6.997" className={`${rotated ? 'rotate-180' : ''}`}  {...angleDonwBlack}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="9.71" height="6.997" viewBox="0 0 9.71 6.997" {...angleDonwBlack}>
                     <path id="Path_20922" data-name="Path 20922" d="M17.187,16.925a.552.552,0,0,1-.348-.98L21.45,12.2a.177.177,0,0,0,.079-.128.18.18,0,0,0-.079-.128L16.839,8.2a.552.552,0,0,1,.7-.857l4.612,3.747a1.241,1.241,0,0,1,0,1.97L17.535,16.8a.548.548,0,0,1-.347.123" transform="translate(16.925 -16.635) rotate(90)" />
                 </svg>
             }
             {angleDonwWhite &&
-                <svg xmlns="http://www.w3.org/2000/svg" width="9.71" height="6.997" viewBox="0 0 9.71 6.997" className={`${rotated ? 'rotate-180' : ''}`}  {...angleDonwWhite}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="9.71" height="6.997" viewBox="0 0 9.71 6.997" {...angleDonwWhite}>
                     <path id="Path_20922" data-name="Path 20922" d="M17.187,16.925a.552.552,0,0,1-.348-.98L21.45,12.2a.177.177,0,0,0,.079-.128.18.18,0,0,0-.079-.128L16.839,8.2a.552.552,0,0,1,.7-.857l4.612,3.747a1.241,1.241,0,0,1,0,1.97L17.535,16.8a.548.548,0,0,1-.347.123" transform="translate(16.925 -16.635) rotate(90)" fill="#f6f5f1" />
                 </svg>
             }

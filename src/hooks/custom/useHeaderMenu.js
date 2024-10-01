@@ -1,10 +1,6 @@
 import { useEffect, useState, useRef, useLayoutEffect } from 'react'
-import { useHeader } from '../layout/useHeader';
 
 export default function useHeaderMenu() {
-    const data = useHeader();
-    const nodes = data.allWp.nodes
-    const headerData = nodes?.header?.ACF_header
     const headerRef = useRef(null);
     const [activeMenuIndex, setActiveMenuIndex] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,6 +9,7 @@ export default function useHeaderMenu() {
     const [isHeaderFixed, setHeaderFixed] = useState(false);
     const [isHidden, setHidden] = useState(false);
     const [isMenuIconClicked, setIsMenuIconClicked] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
 
     const handleScroll = () => {
         if (typeof window !== 'undefined') {
@@ -22,15 +19,23 @@ export default function useHeaderMenu() {
         }
     };
 
-    const handleMenuClick = (index, event) => {
+    const handleMenuClick = (index, event, _isMegaMenu) => {
         event.preventDefault();
-        if (activeMenuIndex == index) {
-            setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen);
-        } else {
-            if (!isMenuOpen) {
+        if (_isMegaMenu) {
+            if (activeMenuIndex === index) {
                 setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen);
+                setIsClicked(prevIsMenuOpen => !prevIsMenuOpen);
+            } else {
+                if (!isMenuOpen) {
+                    setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen);
+                    setIsClicked(prevIsMenuOpen => !prevIsMenuOpen);
+                }
             }
+        } else {
+            setIsMenuOpen(false);
+            setIsClicked(false);
         }
+
         setActiveMenuIndex(index);
     };
 
@@ -45,21 +50,50 @@ export default function useHeaderMenu() {
         }
     }, [isMenuOpen]);
 
+
     const handleClickOutside = (event) => {
-        if (typeof window !== 'undefined') {
+        if (headerRef.current && !headerRef.current.contains(event.target)) {
+            setIsMenuOpen(false);
+            setIsClicked(false);
             const body = document.querySelector('body');
-            if (body && headerRef.current && !headerRef.current.contains(event.target)) {
-                setIsMenuOpen(false);
-                body.classList.remove('show-background-layer');
-                body.style.overflow = 'auto';
-                localStorage.removeItem('backgroundLayer');
+            body.classList.remove('show-background-layer');
+            body.style.overflow = 'auto';
+            localStorage.removeItem('backgroundLayer');
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+    const handleMenuIconClick = () => {
+        if (typeof window !== 'undefined' && window.innerWidth <= 992) {
+            setIsMenuIconClicked(prevState => !prevState);
+
+            const html = document.querySelector('html');
+            if (html) {
+                html.style.overflow = isMenuIconClicked ? '' : 'hidden';
             }
         }
     };
 
-    const handleMenuIconClick = () => {
+    useEffect(() => {
+        const html = document.querySelector('html');
+        if (isMenuIconClicked) {
+            html.style.overflow = 'hidden';
+        } else {
+
+            html.style.overflow = '';
+        }
+    }, [isMenuIconClicked]);
+
+    const handleMegaMenuIconClick = () => {
         if (typeof window !== 'undefined') {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 992) {
                 setIsMenuIconClicked(prevState => !prevState);
 
                 const body = document.querySelector('body');
@@ -78,9 +112,15 @@ export default function useHeaderMenu() {
     }, [isMenuIconClicked]);
 
     useLayoutEffect(() => {
-        const handleLinkClick = () => {
+        const handleLinkClick = (event) => {
             const body = document.querySelector('body');
-            if (body) {
+            if (body && isMenuOpen) {
+                if (typeof window !== 'undefined') {
+                    if (! event.currentTarget.href.includes(window.location.origin)) {
+                        window.open(event.currentTarget.href, '_blank');
+                    }
+                }
+
                 body.style.overflow = 'hidden';
             }
         };
@@ -118,21 +158,8 @@ export default function useHeaderMenu() {
                 window.removeEventListener('scroll', handleScroll);
             };
         }
-    }, [isHidden, isHeaderFixed, prevScrollPos]);
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            if (isMenuOpen) {
-                window.addEventListener('click', handleClickOutside);
-            } else {
-                window.removeEventListener('click', handleClickOutside);
-            }
-
-            return () => {
-                window.removeEventListener('click', handleClickOutside);
-            };
-        }
-    }, [isMenuOpen]);
+    }, [isHidden, isHeaderFixed, prevScrollPos,]);
+   
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -149,10 +176,11 @@ export default function useHeaderMenu() {
         isMenuOpen, setIsMenuOpen,
         prevScrollPos, setPrevScrollPos,
         visible, setVisible,
+        isClicked, setIsClicked,
         isHeaderFixed, setHeaderFixed,
         isHidden, setHidden,
         isMenuIconClicked, setIsMenuIconClicked,
         headerRef, handleMenuClick,
-        handleMenuIconClick
+        handleMenuIconClick, handleMegaMenuIconClick
     }
 }

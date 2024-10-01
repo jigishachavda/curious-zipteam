@@ -10,7 +10,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const Footer = () => {
     const data = useFooter();
-    const nodes = data.allWp.nodes
+    const nodes = data?.allWp?.nodes
     const contentFooter = nodes[0]?.footer?.ACF_footer
     useEffect(() => {
         Aos.init();
@@ -30,7 +30,7 @@ const Footer = () => {
 
     return (
         <>
-            <section className='bg-primary tpt-105 dpt-150 position-relative overflow-hidden'>
+            <footer className='bgprimary tpt-105 dpt-150 position-relative overflow-hidden'>
                 <div className='container position-relative z-3' data-aos='fade-up' data-aos-easing="linear" data-aos-duration="500">
                     <div className='row dpb-115 tpb-65'>
                         <div className='col-lg-3 dmb-40 d-lg-block d-none'>
@@ -50,61 +50,67 @@ const Footer = () => {
                                             title="Book a Demo"
                                         />
                                     </div>
-                                    <Link to="#" data-bs-toggle="modal" data-bs-target="#contact_modal" className='bg-primary my-1 radiusSX d-lg-none d-inline-flex h-100 justify-content-center align-items-center position-absolute top-0 end-0 footer-btn'>
+                                    <Link to="#" data-bs-toggle="modal" data-bs-target="#contact_modal" className='bgprimary my-1 radiusSX d-lg-none d-inline-flex h-100 justify-content-center align-items-center position-absolute top-0 end-0 footer-btn'>
                                         <Svg ButtonWhiteArrow />
                                     </Link>
                                 </div>
                             </div>
                         </div>
-                        <div className='col-lg-3 dmb-40 d-lg-none d-md-block'>
+                        <div className='col-lg-3 dmb-40 d-lg-none'>
                             <a href='' className='text-decoration-none h-100 d-flex align-items-center'>
                                 <Svg whiteLogo />
                             </a>
                         </div>
+                        <div className='col-lg-3 dmb-40 footer-logo2'>
+                            {/* <a href='' className='text-decoration-none h-100 d-flex align-items-center'>
+                                <Svg whiteLogo />
+                            </a> */}
+                            <GatsbyImage image={getImage(contentFooter?.logo2?.localFile)} alt='' imgStyle={{ quality: 100 }} />
+                        </div>
                         <div className='col-lg-9 ps-xl-5 ms-xl-auto'>
                             <div className='row footer-menus'>
                                 <div className='col-md-6 col-lg-4 col-xl-3 tmb-40 footer-menus-link'>
-                                    <h5 className='text-lightgray tk-degular fw-semibold text-capitalize fontS'>{contentFooter?.column1.heading}</h5>
+                                    <h5 className='textlightgray tk-degular fw-semibold text-capitalize fontS'>{contentFooter?.column1?.heading}</h5>
                                     <ul className='ps-0 mb-0 dmt-20'>
                                         {contentFooter?.column1?.links?.map((item, i) => (
                                             <li key={i} className='dmb-15 lh-1 list-none'>
-                                                <a href={item?.link?.url} onClick={goTopPage} className='text-decoration-none text-lightgray tk-degular fw-normal text-capitalize fontXX'>{item?.link?.title}</a>
+                                                <a href={item?.link?.url} onClick={goTopPage} className='text-decoration-none textlightgray tk-degular fw-normal text-capitalize fontXX' dangerouslySetInnerHTML={{ __html: item?.link?.title }}></a>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
                                 <div className='col-md-6 col-lg-4 col-xl-3 tmb-40 footer-menus-link'>
-                                    <h5 className='text-lightgray tk-degular fw-semibold text-capitalize fontS'>{contentFooter?.column2.heading}</h5>
+                                    <h5 className='textlightgray tk-degular fw-semibold text-capitalize fontS'>{contentFooter?.column2?.heading}</h5>
                                     <ul className='ps-0 mb-0 dmt-20'>
                                         {contentFooter?.column2?.links?.map((item, i) => (
                                             <li key={i} className='dmb-15 lh-1 list-none'>
-                                                <a href={item?.link?.url} onClick={goTopPage} className='text-decoration-none text-lightgray tk-degular fw-normal text-capitalize fontXX'>{item?.link?.title}</a>
+                                                <a href={item?.link?.url} onClick={goTopPage} className='text-decoration-none textlightgray tk-degular fw-normal text-capitalize fontXX' dangerouslySetInnerHTML={{ __html: item?.link?.title }}></a>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
                                 <div className='col-md-6 col-lg-4 col-xl-3 tmb-40 footer-menus-link'>
-                                    <h5 className='text-lightgray tk-degular fw-semibold text-capitalize fontS'>{contentFooter?.column3.heading}</h5>
+                                    <h5 className='textlightgray tk-degular fw-semibold text-capitalize fontS'>{contentFooter?.column3?.heading}</h5>
                                     <ul className='ps-0 mb-0 dmt-20'>
                                         {contentFooter?.column3?.links?.map((item, i) => (
                                             <li key={i} className='dmb-15 lh-1 list-none' onClick={redirectToTop}>
-                                                <a href={item?.link?.url} onClick={goTopPage} className='text-decoration-none text-lightgray tk-degular fw-normal text-capitalize fontXX'>{item?.link?.title}</a>
+                                                <a href={item?.link?.url} onClick={goTopPage} className='text-decoration-none textlightgray tk-degular fw-normal text-capitalize fontXX' dangerouslySetInnerHTML={{ __html: item?.link?.title }}></a>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
                                 <div className='col-md-6 col-lg-4 col-xl-3 tmb-40 footer-menus-link'>
-                                    <h5 className='text-lightgray tk-degular fw-semibold text-capitalize fontS'>{contentFooter?.column4.heading}</h5>
+                                    <h5 className='textlightgray tk-degular fw-semibold text-capitalize fontS'>{contentFooter?.column4?.heading}</h5>
                                     <ul className='ps-0 mb-0 dmt-20'>
                                         {contentFooter?.column4?.links?.map((item, i) => (
                                             <li key={i} className='dmb-15 lh-1 list-none'>
-                                                {item?.link?.title?.trim() == "Book Demo" ?
+                                                {item?.link?.title?.trim() === "Book Demo" ?
                                                     (<a
                                                         data-bs-toggle={'modal'}
                                                         data-bs-target={"#contact_modal"}
-                                                        className='text-decoration-none text-lightgray tk-degular fw-normal text-capitalize fontXX '>{item?.link?.title}</a>
+                                                        className='text-decoration-none textlightgray tk-degular fw-normal text-capitalize fontXX ' dangerouslySetInnerHTML={{ __html: item?.link?.title }}></a>
                                                     ) : (
-                                                        <a href={item?.link?.url} onClick={goTopPage} className='text-decoration-none text-lightgray tk-degular fw-normal text-capitalize fontXX'>{item.link.title}</a>
+                                                        <a href={item?.link?.url} onClick={goTopPage} className='text-decoration-none textlightgray tk-degular fw-normal text-capitalize fontXX' dangerouslySetInnerHTML={{ __html: item?.link?.title }}></a>
                                                     )
                                                 }
                                             </li>
@@ -115,32 +121,32 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className='row h-100 d-lg-flex align-items-lg-end dpb-70'>
-                        <ul className='col-lg-3 col-xl-3 ps-0 mb-0 d-flex align-items-center social-icons'>
+                        <ul className='col-lg-3 col-xl-3 ps-lg-0 mb-0 d-flex align-items-center social-icons'>
                             {contentFooter?.soicalMedia?.map((item, i) => (
-                                <li className='list-none me-4 tmb-65' key={i}>
-                                    <a href={item.link.url} className='text-decoration-none'>
-                                        <GatsbyImage image={getImage(item?.icon?.localFile)} alt='' />
+                                <li className='list-none me-4 tmb-65 d-inline-flex align-items-center' key={i}>
+                                    <a href={item?.link?.url} className='text-decoration-none d-inline-flex align-items-center'>
+                                        <GatsbyImage image={getImage(item?.icon?.localFile)} alt='' imgStyle={{ quality: 100 }} />
                                     </a>
                                 </li>
                             ))}
                         </ul>
                         <ul className='col-lg-8 col-xl-9 mb-0 h-100 ms-lg-auto d-lg-flex align-items-lg-end  justify-content-lg-end'>
                             <li className='list-none d-lg-inline-flex d-none mx-lg-4'>
-                                <span className='text-lightgray tk-degular fontX lh-1 text-decoration-none '>
+                                <span className='textlightgray tk-degular fontX lh-1 text-decoration-none '>
                                     {contentFooter?.copyrightText}
                                 </span>
                             </li>
                             <li className='list-none tmb-15'>
                                 <div className='d-flex justify-content-between'>
-                                    {contentFooter?.rightBottomLink.map((item, i) => (
-                                        <a key={i} href={item.link.url} className='text-lightgray tk-degular fontX lh-1 text-decoration-none mx-lg-4'>
-                                            {item.link.title}
+                                    {contentFooter?.rightBottomLink?.map((item, i) => (
+                                        <a key={i} href={item?.link?.url} className='textlightgray tk-degular fontX lh-1 text-decoration-none mx-lg-4'>
+                                            {item?.link?.title}
                                         </a>
                                     ))}
                                 </div>
                             </li>
                             <li className=' list-none d-block d-lg-none'>
-                                <span className='text-lightgray tk-degular fontX lh-1 text-decoration-none dmb-15'>
+                                <span className='textlightgray tk-degular fontX lh-1 text-decoration-none dmb-15'>
                                     {contentFooter?.copyrightText}
                                 </span>
                             </li>
@@ -150,7 +156,7 @@ const Footer = () => {
                 <div className='footer-bg-img position-absolute top-0 start-0'>
                     <img src={footerBgImg} alt="" className='h-100' />
                 </div>
-            </section>
+            </footer >
         </>
     )
 }

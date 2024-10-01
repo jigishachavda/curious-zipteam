@@ -1,4 +1,5 @@
 const path = require("path");
+const { merge } = require('webpack-merge');
 
 module.exports = {
     entry: [__dirname + "/src/assets/styles/scss/main.scss"],
@@ -20,7 +21,7 @@ module.exports = {
                     {
                         loader: "file-loader",
                         options: { outputPath: "/", name: "[name].min.css" },
-                    }, 
+                    },
                     "sass-loader",
                 ],
             },
